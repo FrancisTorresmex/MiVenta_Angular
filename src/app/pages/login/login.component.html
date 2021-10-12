@@ -1,1 +1,24 @@
-<p>login works!</p>
+<mat-card class="cardForm">
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()"  class="form">    
+        <mat-form-field class="email">
+            <mat-label>Correo</mat-label>
+            <mat-icon class="iconEmail">email</mat-icon>
+            <input type="email" matInput placeholder="ejemplo@ejemplo.com" formControlName="email"> <!--El nombre del campo de mi formGroup-->
+            <mat-hint>Correo</mat-hint>
+        </mat-form-field>
+    
+        <mat-form-field class="password">
+            <mat-label>Contraseña</mat-label>
+            <mat-icon class="iconPassword">password</mat-icon>
+            <input type="password" matInput formControlName="password"> <!--El nombre del campo de mi formGroup-->
+            <mat-hint>Contraseña</mat-hint>
+        </mat-form-field>
+    
+        <!--este botón al estar dentro del formGroup el ngSumbit se encarga de asignarle lo que pasa al presionarlo-->
+        <button type="submit" [disabled]="!loginForm.valid" mat-raised-button class="button">Iniciar sesión</button>
+    </form>
+    
+
+</mat-card>
+

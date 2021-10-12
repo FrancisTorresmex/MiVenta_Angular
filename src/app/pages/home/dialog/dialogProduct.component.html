@@ -1,17 +1,21 @@
+
 <h3 mat-dialg-title>Información del producto</h3>
 
 <div mat-dialog-content>
     {{myproduct.nombre}}
     <mat-card-subtitle>$ {{myproduct.precioUnitario}} M.X</mat-card-subtitle>
     
-    <mat-form-field appearance="fill"> <!--Cantidad de articulos-->
-        <mat-label>Cantidad</mat-label>
-        <input matInput type="number" placeholder="cantidad de articulos">
+    <mat-form-field>
+        <mat-label>Cantidad de pedidio</mat-label>
+        <input type="number" [(ngModel)]="cantidad" matInput>
     </mat-form-field>
+        
+
+    
     
 </div>
 
 <mat-dialog-actions>
-    <button mat-button color="primary">Añadir</button>
+    <button mat-button color="primary" (click)="AddConcept()" >Añadir</button>
     <button mat-button color="basic" (click)="close()" >Regresar</button>
 </mat-dialog-actions>
