@@ -8,6 +8,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { DialogProductComponent } from './pages/home/dialog/dialogProduct.component';
+import { DialogShoppingCart } from './pages/home/dialog/dialogShoppingCart.component';
 import { MenuComponent } from './components/menu/menu.component'; 
 
 
@@ -23,7 +24,8 @@ import { MatInputModule } from '@angular/material/input'; //input material
 import { MatFormFieldModule } from '@angular/material/form-field'; //forms material
 import { MatToolbarModule } from '@angular/material/toolbar'; //tolbar material
 import { MatIconModule } from '@angular/material/icon';
-import { SaleComponent } from './pages/sale/sale.component'; //iconos material
+import { SaleComponent } from './pages/sale/sale.component';
+
 
 
 
@@ -37,8 +39,10 @@ import { SaleComponent } from './pages/sale/sale.component'; //iconos material
     LoginComponent,
     RegisterComponent,
     DialogProductComponent,
+    DialogShoppingCart,
     MenuComponent,
-    SaleComponent
+    SaleComponent,
+    
   ],
   imports: [
     BrowserModule,

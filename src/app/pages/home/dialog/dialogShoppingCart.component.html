@@ -1,0 +1,16 @@
+<h3 mat-Dialog-Title>Carrito de compras</h3>
+
+<div mat-dialog-content>
+    
+   <mat-card *ngFor="let item of concepts">
+      <mat-card-title>{{item.nombre}}</mat-card-title>
+      <mat-dialog-content>
+         <p>PrecioC/U: {{item.precioUnitario}} M.X</p>
+         <p>Cantidad: {{item.cantidad}}</p>
+      </mat-dialog-content>
+   </mat-card>
+
+</div>
+
+
+

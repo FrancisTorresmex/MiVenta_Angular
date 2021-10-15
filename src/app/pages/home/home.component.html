@@ -1,11 +1,14 @@
-<app-menu></app-menu>
+<!--a la variable dataConcept de menú le asigno lo que contenga cart, en este caso la lista de productos que a agregado el usuario-->
+<app-menu [dataCart]="cart"></app-menu>
+
+
 
 <div>
     <mat-card *ngFor="let item of lst">
         <mat-card-title>{{item.nombre}}</mat-card-title>
         <mat-card-content>$ {{item.precioUnitario}} M.X</mat-card-content>
         <mat-card-actions>
-            <button mat-button color="primary" (click)="openDialog(item)">Agregar</button>
+            <button mat-button color="primary" (click)="openDialogProduct(item)">Agregar</button>
         </mat-card-actions>
     
     </mat-card>    

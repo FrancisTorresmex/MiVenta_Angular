@@ -4,6 +4,9 @@
             <mat-icon>menu</mat-icon>            
         </button>        
         <span>MiVenta</span>
+        <a [routerLink]="['/home']" >Inicio</a>
+        
+        <button mat-button (click)="openDialogShopping()" >Mi carrito</button>        
         <button mat-button (click)="logout()" >Salir</button>        
     </mat-toolbar>
 </div>

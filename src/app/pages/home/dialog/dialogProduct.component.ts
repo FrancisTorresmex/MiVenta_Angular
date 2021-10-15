@@ -1,11 +1,10 @@
 import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { ApiProductoService } from '../../../services/apiProducto.service';
 import { Product } from '../../../models/product';
 import { Concept } from '../../../models/concept';
-import { ApiVentaService } from '../../../services/apiVenta.service';
 import { Sale } from "src/app/models/sale";
-import { Observable } from "rxjs";
+import { CartProduct } from '../../../models/cartProduct';
+
 
 
 @Component({
@@ -16,6 +15,7 @@ export class DialogProductComponent {
     //objetos 
     public sale!: Sale;  
     public concept: Concept[]; 
+    public cart: CartProduct[];
     
     //variable para la cantidad de articulos de ese producto 
     public cantidad: number = 0;        
@@ -23,11 +23,11 @@ export class DialogProductComponent {
     
 
     constructor(
-            private dialogRef: MatDialogRef<DialogProductComponent>, //en el constructor se encuentra mi objeto de MatDialogRef el cual es del tipo de esta misma clase para que se pueda cerrar el mismo, o asi            
-            private apiVentaService: ApiVentaService,
+            private dialogRef: MatDialogRef<DialogProductComponent>, //en el constructor se encuentra mi objeto de MatDialogRef el cual es del tipo de esta misma clase para que se pueda cerrar el mismo, o asi                        
             @Inject(MAT_DIALOG_DATA) public product: Product //lo que recibe este dialog de otros componentes
         ) {
             this.concept = []; //inicializo la lista
+            this.cart = [];
         }
 
     ngOnInit(): void {}
@@ -39,31 +39,43 @@ export class DialogProductComponent {
         precioUnitario: this.product.precioUnitario,
         existencia: this.product.existencia,
         url: this.product.url
-    };    
-
+    }; 
+    
+    
     //agregar concepto
-    public AddConcept() {        
-
+    AddConcept() {        
         // datos del concepto a añadir
-        const myconcept: Concept = {
-            cantidad: this.cantidad,
-            importe: this.payment,
+        const myCart: CartProduct = {
+            cantidad: this.cantidad,            
             precioUnitario: this.product.precioUnitario,
-            idProducto: this.product.id,                        
+            nombre: this.myproduct.nombre,                       
         }                        
-        this.concept.push(myconcept);  //se agrega a la lista el concepto               
+        this.cart.push(myCart);  //se agrega a la lista el concepto               
 
         this.dialogRef.close({  //al cerrar este dialog despues de presionar añadir (se envia esa data al componente home, para que la reciba ahi y añadirla al carrito)
-            data: this.concept 
+            data: this.cart 
         });
-
-        console.log(this.concept);                
+        // console.log(this.concept);                
     }
 
-    //agregar venta
-    public AddSale() {
-        this.sale.conceptos = this.concept;
-    }
+
+    // //agregar concepto
+    // AddConcept() {        
+    //     // datos del concepto a añadir
+    //     const myconcept: Concept = {
+    //         cantidad: this.cantidad,
+    //         importe: this.payment,
+    //         precioUnitario: this.product.precioUnitario,
+    //         idProducto: this.product.id,                        
+    //     }                        
+    //     this.concept.push(myconcept);  //se agrega a la lista el concepto               
+
+    //     this.dialogRef.close({  //al cerrar este dialog despues de presionar añadir (se envia esa data al componente home, para que la reciba ahi y añadirla al carrito)
+    //         data: this.concept 
+    //     });
+    //     // console.log(this.concept);                
+    // }
+
 
     //Cerrar el dialosg
     close() {
