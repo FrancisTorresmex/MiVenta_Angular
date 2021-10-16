@@ -46,6 +46,7 @@ export class DialogProductComponent {
     AddConcept() {        
         // datos del concepto a añadir
         const myCart: CartProduct = {
+            idProducto: this.product.id,
             cantidad: this.cantidad,            
             precioUnitario: this.product.precioUnitario,
             nombre: this.myproduct.nombre,                       

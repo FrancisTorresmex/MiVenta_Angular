@@ -1,5 +1,5 @@
 <!--a la variable dataConcept de menú le asigno lo que contenga cart, en este caso la lista de productos que a agregado el usuario-->
-<app-menu [dataCart]="cart"></app-menu>
+<app-menu [dataCart]="cart" (newDataCart)="f($event)"></app-menu>
 
 
 
