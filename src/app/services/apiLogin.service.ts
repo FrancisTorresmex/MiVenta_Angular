@@ -31,7 +31,7 @@ export class ApiLoginService {
 
     constructor(private _http: HttpClient) {
         //el constructor por primera vez vera si hay algo guardado en localStorage  llamado miUser, si no, esto seria null
-        this._userSubjet = new BehaviorSubject<User>(JSON.parse(localStorage.getItem("miUser")!));
+        this._userSubjet = new BehaviorSubject<User>(JSON.parse(localStorage.getItem("miUser")!));        
         //usuario estara al pendiente de cambios en _userSubject
         this.user = this._userSubjet.asObservable();
     }

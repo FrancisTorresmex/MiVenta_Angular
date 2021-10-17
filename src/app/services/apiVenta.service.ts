@@ -1,6 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Sale } from "../models/sale";
+import { Response } from '../models/response';
+
+import { Observable } from "rxjs";
 
 
 const httpOption = {
@@ -14,13 +17,13 @@ const httpOption = {
 })
 export class ApiVentaService {
 
-    url: string = 'https://localhost:44368/api/Venta';
+    url: string = 'https://localhost:44372/api/Venta';
 
     constructor( private _http: HttpClient ) {}
 
     //agregar venta
-    Add(sale: Sale) {
-        return this._http.post(this.url, sale, httpOption);
+    Add(sale: Sale): Observable<Response>{
+        return this._http.post<Response>(this.url, sale, httpOption);
     }
 
 }

@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
       ) {                  
       }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {        
     this.getProduct(); //cada que inicie se ejecuta el método       
     this.cart = []; //inicializo la lista    
   }
@@ -35,9 +35,10 @@ export class HomeComponent implements OnInit {
   //Obtener datos del servicio
   getProduct() {
     this._apiProductoService.getProduct().subscribe(resp => {
-      this.lst = resp.data; //lst se le asigna lo que venga en resp.data            
+      this.lst = resp.data; //lst se le asigna lo que venga en resp.data                        
     });
   }
+
 
   f($event: CartProduct[]) {
     this.cart = $event;

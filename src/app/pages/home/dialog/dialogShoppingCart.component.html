@@ -2,9 +2,9 @@
 
 <div mat-dialog-content>
 
-   <h3 *ngIf="concepts.length == 0">Sin articulos aún, añade algunos :)</h3> <!--si al ir al carrito la lista concepts no tiene nada, muestra mensaje-->
+   <h3 *ngIf="cart.length == 0">Sin articulos aún, añade algunos :)</h3> <!--si al ir al carrito la lista cart no tiene nada, muestra mensaje-->
     
-   <mat-card *ngFor="let item of concepts">
+   <mat-card *ngFor="let item of cart">
       <mat-card-title>{{item.nombre}}</mat-card-title>
       <mat-dialog-content>
          <p>PrecioC/U: {{item.precioUnitario}} M.X</p>
@@ -18,7 +18,8 @@
 </div>
 
 <mat-card-actions>
-   <button mat-button color="primary" (click)="close()">Regresar</button>
+   <button mat-button color="primary"(click)="sendSale()">Comprar</button>
+   <button mat-button color="basic" (click)="close()">Regresar</button>
 </mat-card-actions>
 
 
