@@ -1,5 +1,7 @@
 <mat-card class="cardForm">
 
+    <h3>Iniciar sesión</h3>
+
     <form [formGroup]="loginForm" (ngSubmit)="login()"  class="form">    
         <mat-form-field class="email">
             <mat-label>Correo</mat-label>
@@ -17,6 +19,8 @@
     
         <!--este botón al estar dentro del formGroup el ngSumbit se encarga de asignarle lo que pasa al presionarlo-->
         <button type="submit" [disabled]="!loginForm.valid" mat-raised-button class="button">Iniciar sesión</button>
+
+        <button mat-button [routerLink]="['/register']">No tengo cuenta</button>
     </form>
     
 

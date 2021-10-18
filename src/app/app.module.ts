@@ -11,6 +11,8 @@ import { DialogProductComponent } from './pages/home/dialog/dialogProduct.compon
 import { DialogShoppingCart } from './pages/home/dialog/dialogShoppingCart.component';
 import { MenuComponent } from './components/menu/menu.component'; 
 import { SaleComponent } from './pages/sale/sale.component';
+import { NotFoundComponent } from './pages/notFound/notFound.component';
+
 
 import { JwtInterceptor } from './security/jwt.interceptor';
 
@@ -52,6 +54,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     DialogShoppingCart,    
     MenuComponent,
     SaleComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,32 @@
-<p>register works!</p>
+<mat-card class="cardForm">
+
+    <h3>Crear nueva cuenta</h3>
+
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="form">
+
+        <mat-form-field class="email">
+            <mat-label>Correo</mat-label>
+            <mat-icon class="iconEmail">email</mat-icon>
+            <input type="email" matInput placeholder="ejemplo@ejemplo.com" formControlName="email"> <!--El nombre del campo de mi formGroup-->
+        </mat-form-field>
+    
+        <mat-form-field class="name">
+            <mat-label>Nombre</mat-label>
+            <mat-icon class="iconName">face</mat-icon>
+            <input type="text" matInput  formControlName="nombre"> <!--El nombre del campo de mi formGroup-->
+        </mat-form-field>
+    
+        <mat-form-field class="password">
+            <mat-label>Contraseña</mat-label>
+            <mat-icon class="iconPassword">password</mat-icon>
+            <input type="password" matInput formControlName="password"> <!--El nombre del campo de mi formGroup-->
+        </mat-form-field>
+    
+        <button type="submit" mat-raised-button [disabled]="!registerForm.valid" class="button">Registrarme</button>
+    
+        <button mat-button [routerLink]="['/login']">Ya tengo cuenta</button>
+    
+    </form>
+    
+
+</mat-card>

@@ -39,11 +39,11 @@ export class ApiLoginService {
     //Inicio de sesión
     login(login: Login) : Observable<Response> {
         return this._http.post<Response>(this._url, login, httpOption).pipe( //url, body, headers
-            map(resp => {
+            map(resp => {                
                 if(resp.success === 1) { //si el resultado recibido de la api es 1, osea Ok
-                    const user: User = resp.data;
+                    const user: User = resp.data;                    
                     localStorage.setItem('miUser', JSON.stringify(user));  // guardar en localstorage un item que se llamara miUsuario, y y la data 
-                }
+                }                              
                 return resp;
             })            
         );        
