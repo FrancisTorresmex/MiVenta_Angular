@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Observable } from "rxjs";
 import { ApiLoginService } from '../services/apiLogin.service';
 
 //creado para evitar que puedan acceder a componentes no permitidos, en este caso no accede si no hay sesión

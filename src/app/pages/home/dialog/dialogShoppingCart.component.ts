@@ -5,6 +5,8 @@ import { CartProduct } from '../../../models/cartProduct';
 import { ApiVentaService } from '../../../services/apiVenta.service';
 
 import { Sale } from 'src/app/models/sale';
+import { MySnackBarService } from '../../../tools/snackBar.service';
+
 
 
 @Component({
@@ -19,7 +21,8 @@ export class DialogShoppingCart {
 
     constructor(
         private _refDialog: MatDialogRef<DialogShoppingCart>,
-        private _apiVenta: ApiVentaService,        
+        private _apiVenta: ApiVentaService,  
+        private _mysnackbar: MySnackBarService,      
         @Inject(MAT_DIALOG_DATA) public cart: CartProduct[] //lo que recibe este dialog de otros componentes    
     ) 
     {
@@ -47,27 +50,44 @@ export class DialogShoppingCart {
     }
 
     //enviar la venta a la base de datos (ya enviar los datos de venta y los conceptos)
-    sendSale() {
+    sendSale() {         
         this.addConcept();        
         this.mySale.conceptos = this.myConcepts; //los conceptos de mySale seran los mismos que myConcepts
 
-        this._apiVenta.Add(this.mySale).subscribe(resp => {
+        this._apiVenta.Add(this.mySale).subscribe(resp => {                          
             if (resp.success === 1) { //si la respuesta es 1 osea ok
-                console.log('Se añadio la venta');
+                this.cart = []; //reiniciamos la lista, ya que esos productos del carrito fueron comprados
+                this._mysnackbar.createMySnackBar('Pedido realizado con éxito', '');
+                // console.log('Se añadio la venta');
+            }else{
+                this._mysnackbar.createMySnackBar(resp.message, 'error');
             }
-        });        
+        }, (errorService) => {   //atrapamos el error si algo esta mal                             
+                this._mysnackbar.createMySnackBar('Tienes en tu carrito un articulo con error en la cantidad, mínimo 1', 'error');
+            }
+        );        
         console.log('venta', this.mySale);         
     }
 
-    //eliminar producto de carrito (en typecript eliminar un objeto se usa splice)
-    delete(id: number){        
+    //eliminar producto de carrito (en typescript eliminar un objeto se usa splice)
+    deleteProduct(id: number){        
         this.cart.forEach((item, index) => {  //recorremos la lista y busco el que sea igual a la id que se borrara
             if (item.idProducto === id) this.cart.splice(index, 1) //le digo que borre del index al 1, para solo borrar ese articulo y no todos (sin esto me borraba toda la lista)
         });
+
+        this._mysnackbar.createMySnackBar('Articulo eliminado.', '')
         // console.log('el eliminado:', this.cart);
-        this._refDialog.close({
-            data: this.cart,
-        });
+        // this._refDialog.close({
+        //     data: this.cart,
+        // });
+    }
+
+
+    //Eliminar toda la lista del carrito
+    deleteCart() {
+        this.cart.splice(0, this.cart.length);
+        this._mysnackbar.createMySnackBar('Se eliminaron todos los artículos.', '');
+        this._refDialog.close(); //cierro la ventana, ya que si no hay articulos porque mostrarla     
     }
     
 

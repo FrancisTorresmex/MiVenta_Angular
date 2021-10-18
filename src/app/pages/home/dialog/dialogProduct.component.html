@@ -4,13 +4,35 @@
     {{myproduct.nombre}}
     <mat-card-subtitle>$ {{myproduct.precioUnitario}} M.X</mat-card-subtitle>
     
-    <mat-form-field>
+    <!-- <mat-form-field>
         <mat-label>Cantidad de pedidio</mat-label>
         <input type="number" [(ngModel)]="cantidad" matInput>
-    </mat-form-field>    
+    </mat-form-field>     -->
+    
+    <h3>Cantidad</h3>
+
+    <mat-grid-list cols="1" rowHeight="100px">
+        <mat-grid-tile>
+
+            <button mat-icon-button (click)="restNum()" *ngIf="quantity != 0">
+                <mat-icon color="warn">remove</mat-icon>
+            </button>   
+
+            <p>{{quantity}}</p>        
+            
+            <button mat-icon-button (click)="addNum()">
+                <mat-icon color="primary">add</mat-icon>
+            </button>
+
+        </mat-grid-tile>        
+    </mat-grid-list>
+
+       
+    
+
 </div>
 
 <mat-dialog-actions>
-    <button mat-button color="primary" (click)="AddConcept()" >Añadir</button>
+    <button mat-button color="primary" (click)="AddToCart()" >Añadir</button>
     <button mat-button color="basic" (click)="close()" >Regresar</button>
 </mat-dialog-actions>

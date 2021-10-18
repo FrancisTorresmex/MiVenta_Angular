@@ -52,8 +52,10 @@ export class HomeComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.getProduct(); //una vez que se cierre el dialog, volvemos a ejecutar el metodo getProduct            
-      //me interesa insertar en la lista por ejemplo 0: {cantidad: 0, precioUnitario: 56.5, nombre: 'botella de café'}      
-      this.cart.push(result.data[0]); //agregamos a la lista concept lo que recibamos del dialog (en este caso el concepto del producto (cantidad, precio, id etc)), solo quiero la data (la data es algo de sistema al hacer push luego d eun subscribe)
+      //me interesa insertar en la lista por ejemplo 0: {cantidad: 0, precioUnitario: 56.5, nombre: 'botella de café'}  (si el result no es null obvio)  
+      if(result != null){
+        this.cart.push(result.data[0]); //agregamos a la lista concept lo que recibamos del dialog (en este caso el concepto del producto (cantidad, precio, id etc)), solo quiero la data (la data es algo de sistema al hacer push luego d eun subscribe)
+      }        
       console.log(this.cart);
     });
   }

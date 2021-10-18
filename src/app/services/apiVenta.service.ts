@@ -22,7 +22,7 @@ export class ApiVentaService {
     constructor( private _http: HttpClient ) {}
 
     //agregar venta
-    Add(sale: Sale): Observable<Response>{
+    Add(sale: Sale): Observable<Response>{        
         return this._http.post<Response>(this.url, sale, httpOption);
     }
 

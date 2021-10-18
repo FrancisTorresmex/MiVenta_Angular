@@ -10,21 +10,31 @@ import { RegisterComponent } from './pages/register/register.component';
 import { DialogProductComponent } from './pages/home/dialog/dialogProduct.component';
 import { DialogShoppingCart } from './pages/home/dialog/dialogShoppingCart.component';
 import { MenuComponent } from './components/menu/menu.component'; 
+import { SaleComponent } from './pages/sale/sale.component';
+
+import { JwtInterceptor } from './security/jwt.interceptor';
 
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http'; //hacer peticiones http
+import { HTTP_INTERCEPTORS } from '@angular/common/http'; //para los interceptores (lo uso en jwt.interface)
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; //para formularios (FormsModule), para formularios reactivos (todo dentro de un grupo) se usa ReactiveFormsModule
 
 
 
 import { MatCardModule } from '@angular/material/card'; //card de material
-import { MatButtonModule } from '@angular/material/button'; //botones material
+import { MatButtonModule } from '@angular/material/button'; //botones y icon button material
 import { MatDialogModule } from '@angular/material/dialog'; //dialog material
 import { MatInputModule } from '@angular/material/input'; //input material
 import { MatFormFieldModule } from '@angular/material/form-field'; //forms material
 import { MatToolbarModule } from '@angular/material/toolbar'; //tolbar material
-import { MatIconModule } from '@angular/material/icon';
-import { SaleComponent } from './pages/sale/sale.component';
+import { MatIconModule } from '@angular/material/icon'; //iconos material
+import { MatSnackBarModule } from '@angular/material/snack-bar'; //snackbar material
+import {MatGridListModule} from '@angular/material/grid-list';
+
+
+
+
 
 
 
@@ -39,10 +49,9 @@ import { SaleComponent } from './pages/sale/sale.component';
     LoginComponent,
     RegisterComponent,
     DialogProductComponent,
-    DialogShoppingCart,
+    DialogShoppingCart,    
     MenuComponent,
     SaleComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -58,8 +67,13 @@ import { SaleComponent } from './pages/sale/sale.component';
     MatFormFieldModule,
     MatToolbarModule,
     MatIconModule,
+    MatSnackBarModule,
+    MatGridListModule,
   ],
-  providers: [],
+  providers: [
+    //le agreglo la constante llamada Http_interseptor(es de sistema), que use mi clase creada llamada JwtInterceptor
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true} 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

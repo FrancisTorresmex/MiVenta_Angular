@@ -7,6 +7,9 @@
     <mat-card *ngFor="let item of lst">
         <mat-card-title>{{item.nombre}}</mat-card-title>
         <mat-card-content>$ {{item.precioUnitario}} M.X</mat-card-content>
+        
+        <p>{{item.existencia == 1 ? 'Disponible' : 'No disponible'}}</p>
+
         <mat-card-actions>
             <button mat-button color="primary" (click)="openDialogProduct(item)">Agregar</button>
         </mat-card-actions>

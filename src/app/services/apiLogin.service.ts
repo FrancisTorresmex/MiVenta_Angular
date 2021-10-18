@@ -20,9 +20,9 @@ const httpOption = { //objeto headers
 })
 export class ApiLoginService {
 
-    private _url : string = 'https://localhost:44372/api/Usuario/Login'
+    private _url : string = 'https://localhost:44372/api/Usuario/Login';
 
-    private _userSubjet!: BehaviorSubject<User> //behaviorSubject es un observable, que retorna el ultimo valor inmediatamente
+    private _userSubjet!: BehaviorSubject<User>; //behaviorSubject es un observable, que retorna el ultimo valor inmediatamente
     public user!: Observable<User>;
 
     public get userData() : User { // si no existe sesión el value sera null (se usa en el auth.guard.ts)
@@ -31,7 +31,7 @@ export class ApiLoginService {
 
     constructor(private _http: HttpClient) {
         //el constructor por primera vez vera si hay algo guardado en localStorage  llamado miUser, si no, esto seria null
-        this._userSubjet = new BehaviorSubject<User>(JSON.parse(localStorage.getItem("miUser")!));        
+        this._userSubjet = new BehaviorSubject<User>(JSON.parse(localStorage.getItem("miUser")!));  //parseo lo que contenga miUser del localstorage, para hacerlo un objeto
         //usuario estara al pendiente de cambios en _userSubject
         this.user = this._userSubjet.asObservable();
     }
@@ -46,7 +46,7 @@ export class ApiLoginService {
                 }
                 return resp;
             })            
-        )        
+        );        
     }
 
 

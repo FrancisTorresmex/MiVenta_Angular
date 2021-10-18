@@ -4,6 +4,7 @@ import { Product } from '../../../models/product';
 import { Concept } from '../../../models/concept';
 import { Sale } from "src/app/models/sale";
 import { CartProduct } from '../../../models/cartProduct';
+import { MySnackBarService } from '../../../tools/snackBar.service';
 
 
 
@@ -12,21 +13,19 @@ import { CartProduct } from '../../../models/cartProduct';
 })
 export class DialogProductComponent {
     
-    //objetos 
-    public sale!: Sale;  
-    public concept: Concept[]; 
+    //objetos         
     public cart: CartProduct[];
-    
-    //variable para la cantidad de articulos de ese producto 
-    public cantidad: number = 0;        
+            
+    quantity: number = 0;      //variable para la cantidad de articulos de ese producto 
     payment: number = 1000;  //por ahora el importe defecto es 1000, AÚN ESTA PENDIENTE AUTOMATIZAR
     
 
     constructor(
             private dialogRef: MatDialogRef<DialogProductComponent>, //en el constructor se encuentra mi objeto de MatDialogRef el cual es del tipo de esta misma clase para que se pueda cerrar el mismo, o asi                        
+            private _mysnackbar: MySnackBarService,
             @Inject(MAT_DIALOG_DATA) public product: Product //lo que recibe este dialog de otros componentes
         ) {
-            this.concept = []; //inicializo la lista
+            //inicializo la lista
             this.cart = [];
         }
 
@@ -43,20 +42,33 @@ export class DialogProductComponent {
     
     
     //agregar concepto
-    AddConcept() {        
+    AddToCart() {        
         // datos del concepto a añadir
         const myCart: CartProduct = {
             idProducto: this.product.id,
-            cantidad: this.cantidad,            
+            cantidad: this.quantity,            
             precioUnitario: this.product.precioUnitario,
             nombre: this.myproduct.nombre,                       
         }                        
-        this.cart.push(myCart);  //se agrega a la lista el concepto               
+        this.cart.push(myCart);  //se agrega a la lista el concepto
+        this._mysnackbar.createMySnackBar('Articulo agregado al carrito', '');               
 
-        this.dialogRef.close({  //al cerrar este dialog despues de presionar añadir (se envia esa data al componente home, para que la reciba ahi y añadirla al carrito)
+        this.dialogRef.close({  //al cerrar este dialog despues de presionar añadir (se envia esa data al componente home, para que la reciba ahi y añadirla al carrito)            
             data: this.cart 
         });
         // console.log(this.concept);                
+    }
+
+    //añadir +1 a quantity
+    addNum() {
+        this.quantity = ++this.quantity;
+        console.log(this.quantity);        
+    }
+
+    //restar -1 a quantity
+    restNum() {
+        if(this.quantity > 0) this.quantity = --this.quantity;  //si el numero es mayor a 0 se podra restar, nunca sera menos de 0      
+        console.log(this.quantity);
     }
 
 
