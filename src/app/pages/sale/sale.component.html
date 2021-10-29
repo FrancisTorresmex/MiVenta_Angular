@@ -1,1 +1,27 @@
-<p>sale works!</p>
+<form [formGroup]="addressForm" (ngSubmit)="sendSale()">
+
+    <mat-form-field>
+        <mat-label>Estado</mat-label>
+        <input type="text" matInput placeholder="Estado al que se enviara" formControlName="estado">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Colonia</mat-label>
+        <input type="text" matInput placeholder="Colonia a la que se enviara" formControlName="colonia">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Calle</mat-label>
+        <input type="text" matInput placeholder="Calle del domicilio" formControlName="calle">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Número exterior</mat-label>
+        <input type="number" matInput placeholder="#945" formControlName="numero">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Hacer pedido</button>    
+
+</form>
+
+<button mat-raised-button color="basic" (click)="close()">Cerrar</button>        

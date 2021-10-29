@@ -16,8 +16,8 @@ export class ApiProductoService {
     }
 
     //Obtener todos
-    getProduct():Observable<Response> {
-        return this._http.get<Response>(this.url);
+    getProduct( pagina: number ):Observable<Response> {
+        return this._http.get<Response>(`${this.url}?${pagina}`);
     }
 
     //Agregar

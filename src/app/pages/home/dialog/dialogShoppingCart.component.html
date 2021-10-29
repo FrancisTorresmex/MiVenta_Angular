@@ -1,4 +1,4 @@
-<h3 mat-Dialog-Title>Mi carrito de compras</h3>
+<h3 mat-Dialog-Title>Carrito de productos</h3>
 
 <div mat-dialog-content>
 
@@ -21,10 +21,13 @@
 
 </div>
 
-<mat-card-actions >
-   <button mat-button color="primary"(click)="sendSale()" *ngIf="cart.length != 0">Comprar</button>
-   <button mat-button color="basic" (click)="close()">Regresar</button>
+<mat-card-actions >   
+   <!-- <button mat-button color="primary"(click)="openAddress()" *ngIf="cart.length != 0">Comprar</button>    -->
+   <!-- <button mat-button color="basic" (click)="close()">Regresar</button> -->
 </mat-card-actions>
+
+<h3 mat-dialog-title>Dirección de envio</h3>
+<app-sale [myOrder]="mySale"></app-sale> <!--enviare lo que contenga mySale a la variable myOrder de sale.component.ts-->
 
 
 
