@@ -5,6 +5,7 @@ import { Concept } from '../../models/concept';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogShoppingCart } from '../../pages/home/dialog/dialogShoppingCart.component';
 import { CartProduct } from '../../models/cartProduct';
+import { DialogAllOrders } from './dialog/dialogAllOrders.component';
 
 
 @Component({
@@ -37,6 +38,12 @@ export class MenuComponent implements OnInit {
         }
         this.newDataCart.emit(this.dataCart);  //emitimos los cambios                                             
       })           
+  }
+
+  openDialogAllOrders() {
+    const dialogRef = this._dialog.open( DialogAllOrders, {
+      width: this.width,
+    });
   }
 
   //cerrar sesión

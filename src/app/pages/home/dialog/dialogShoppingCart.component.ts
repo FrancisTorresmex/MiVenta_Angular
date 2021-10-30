@@ -6,7 +6,7 @@ import { ApiVentaService } from '../../../services/apiVenta.service';
 
 import { Sale } from 'src/app/models/sale';
 import { MySnackBarService } from '../../../tools/snackBar.service';
-import { DialogAddressComponent } from './dialogAddress.component';
+
 import { Address } from '../../../models/address';
 import { Router } from '@angular/router';
 
@@ -37,11 +37,15 @@ export class DialogShoppingCart {
         this.myConcepts = [];        
     }    
 
-    ngOnInit(): void {                                                
-        console.log('información desde le menú', this.cart);
-        this.addSales();
-        console.log('esto incluye', this.mySale);
+    ngOnInit(): void {                                                        
+        this.addSales();        
         // console.log('tokenDecode', this.localObject['id']); //id del usuario, obtenido luego del decode
+    }
+
+
+    //Con el Output sale.component.ts que recibimos reseto la lista del carro, para eliminar los productos del carrito una vez se hizo el pedido
+    clanLstCart($event: CartProduct[]){
+        this.cart = [];
     }
 
     //Agrupar los conceptos (para luego juntarlos con sendSale y enviar la venta)
@@ -62,26 +66,7 @@ export class DialogShoppingCart {
         this.addConcept();
         this.mySale.conceptos = this.myConcepts;                 
     }   
-
-    //enviar la venta a la base de datos (ya enviar los datos de venta y los conceptos) (ESTE SENDsALE YA SE ELIMINA, LO DEJE POR MIENTRAS)
-    sendSale() {         
-        this.addConcept();        
-        this.mySale.conceptos = this.myConcepts; //los conceptos de mySale seran los mismos que myConcepts
-
-        this._apiVenta.Add(this.mySale).subscribe(resp => {                          
-            if (resp.success === 1) { //si la respuesta es 1 osea ok
-                this.cart = []; //reiniciamos la lista, ya que esos productos del carrito fueron comprados
-                this._mysnackbar.createMySnackBar('Pedido realizado con éxito', '');
-                // console.log('Se añadio la venta');
-            }else{
-                this._mysnackbar.createMySnackBar(resp.message, 'error');
-            }
-        }, (errorService) => {   //atrapamos el error si algo esta mal                             
-                this._mysnackbar.createMySnackBar('Tienes en tu carrito un articulo con error en la cantidad, mínimo 1', 'error');
-            }
-        );        
-        console.log('venta', this.mySale);         
-    }
+    
 
     //eliminar producto de carrito (en typescript eliminar un objeto se usa splice)
     deleteProduct(id: number){        
@@ -91,7 +76,6 @@ export class DialogShoppingCart {
                 this.myConcepts.splice(index, 1); //eliminamos de la lista concept (para que cuando sale.component lo reciba este actualizada la lista)
             }
         });
-
         this._mysnackbar.createMySnackBar('Articulo eliminado.', '')
         // console.log('el eliminado:', this.cart);
         // this._refDialog.close({

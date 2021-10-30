@@ -9,7 +9,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { DialogProductComponent } from './pages/home/dialog/dialogProduct.component';
 import { DialogShoppingCart } from './pages/home/dialog/dialogShoppingCart.component';
-import { DialogAddressComponent } from './pages/home/dialog/dialogAddress.component';
+import { DialogAllOrders } from './components/menu/dialog/dialogAllOrders.component';
+
 
 import { MenuComponent } from './components/menu/menu.component'; 
 import { SaleComponent } from './pages/sale/sale.component';
@@ -53,8 +54,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     LoginComponent,
     RegisterComponent,
     DialogProductComponent,
-    DialogShoppingCart,
-    DialogAddressComponent,
+    DialogShoppingCart, 
+    DialogAllOrders,   
     MenuComponent,
     SaleComponent,
     NotFoundComponent,

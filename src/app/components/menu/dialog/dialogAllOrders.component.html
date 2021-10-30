@@ -1,0 +1,34 @@
+<h3 mat-dialog-title>Historial de pedidos</h3>
+
+<div mat-dialog-content>
+
+    <mat-card *ngFor="let orders of myOrders">
+        
+        <mat-card-title>Id de venta: {{orders.idVenta}}</mat-card-title>
+        <h3>Total: ${{orders.total}} M.X</h3>
+
+        <mat-card-content>
+
+            <h4>----Productos----</h4>
+            <div *ngFor="let u of orders.losConceptos; let i = index">                
+                <p> Producto: {{orders.losConceptos[i].nombreProducto}}</p>
+                <p> Cantidad: {{orders.losConceptos[i].cantidad}}</p>
+                <p> Precio c/u: {{orders.losConceptos[i].precioUnitario}}</p>
+                <p>-----------------------------</p>
+            </div>            
+
+            <h4>----Dirección de envio----</h4>
+            <p>Estado: {{orders.laDireccion.estado}}</p>
+            <p>Colonia: {{orders.laDireccion.colonia}}</p>
+            <p>Calle: {{orders.laDireccion.calle}}</p>
+            <p>Numero: {{orders.laDireccion.numero}}</p>
+
+        </mat-card-content>
+
+    </mat-card>    
+
+</div>
+
+<mat-dialog-actions>
+    <button mat-button color="primary" (click)="close()">Cerrar</button>
+</mat-dialog-actions>
