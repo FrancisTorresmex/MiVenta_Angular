@@ -13,6 +13,8 @@ import { DialogShoppingCart } from './pages/home/dialog/dialogShoppingCart.compo
 import { DialogUserOrders } from './components/menu/dialog/dialogUserOrders.component';
 import { DialogAllOrders } from './components/menu/dialog/dialogAllOrders.component';
 import { DialogAddProduct } from './pages/product/dialog/dialogAddProduct.component';
+import { DialogConfirmDelete } from './pages/product/dialog/dialgConfirmDelete.component';
+
 
 
 
@@ -72,6 +74,7 @@ import { ProductComponent } from './pages/product/product.component'; //menú ma
     HomeAdminComponent,
     ProductComponent,
     DialogAddProduct,    
+    DialogConfirmDelete,
   ],
   imports: [
     BrowserModule,

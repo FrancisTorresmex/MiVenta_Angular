@@ -14,9 +14,14 @@
 
         <mat-card-actions>
             <button mat-button color="primary" (click)="openDialogProductEdit( product )">Modificar</button>
-            <button mat-button color="warn">Eliminar</button>
+            <button mat-button color="warn" (click)="openDialogConfirmDelete(product)" >Eliminar</button>
         </mat-card-actions>
     </mat-card>
 
+</div>
+
+<div>    
+    <button mat-button color="primary" (click)="previousPage()" *ngIf="page > 1">Anterior</button>
+    <button mat-button color="primary" (click)="nextPage()" *ngIf="lstProduct.length > 0">Siguiente</button>
 </div>
 
