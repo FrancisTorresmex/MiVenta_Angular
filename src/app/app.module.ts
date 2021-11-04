@@ -5,11 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
+import { HomeAdminComponent } from './pages/home/admin/home-admin/home-admin.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { DialogProductComponent } from './pages/home/dialog/dialogProduct.component';
 import { DialogShoppingCart } from './pages/home/dialog/dialogShoppingCart.component';
+import { DialogUserOrders } from './components/menu/dialog/dialogUserOrders.component';
 import { DialogAllOrders } from './components/menu/dialog/dialogAllOrders.component';
+import { DialogAddProduct } from './pages/product/dialog/dialogAddProduct.component';
+
+
 
 
 import { MenuComponent } from './components/menu/menu.component'; 
@@ -35,7 +40,11 @@ import { MatFormFieldModule } from '@angular/material/form-field'; //forms mater
 import { MatToolbarModule } from '@angular/material/toolbar'; //tolbar material
 import { MatIconModule } from '@angular/material/icon'; //iconos material
 import { MatSnackBarModule } from '@angular/material/snack-bar'; //snackbar material
-import {MatGridListModule} from '@angular/material/grid-list';
+import {MatGridListModule} from '@angular/material/grid-list'; 
+import { MatMenuModule } from '@angular/material/menu';
+import { ProductComponent } from './pages/product/product.component'; //menú material
+
+
 
 
 
@@ -55,10 +64,14 @@ import {MatGridListModule} from '@angular/material/grid-list';
     RegisterComponent,
     DialogProductComponent,
     DialogShoppingCart, 
-    DialogAllOrders,   
+    DialogUserOrders,   
+    DialogAllOrders,
     MenuComponent,
     SaleComponent,
     NotFoundComponent,
+    HomeAdminComponent,
+    ProductComponent,
+    DialogAddProduct,    
   ],
   imports: [
     BrowserModule,
@@ -76,6 +89,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatIconModule,
     MatSnackBarModule,
     MatGridListModule,
+    MatMenuModule,
   ],
   providers: [
     //le agreglo la constante llamada Http_interseptor(es de sistema), que use mi clase creada llamada JwtInterceptor

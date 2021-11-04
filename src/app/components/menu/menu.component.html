@@ -1,5 +1,6 @@
 <div>
-    <mat-toolbar>
+    <!--Menú normal-->
+    <mat-toolbar *ngIf ="isAdmin() == false">
         <button mat-icon-button aria-label="abrir menú">
             <mat-icon>menu</mat-icon>            
         </button>        
@@ -7,7 +8,29 @@
         <a [routerLink]="['/home']" >Inicio</a>
         
         <button mat-button (click)="openDialogShopping()" >Mi carrito</button>
-        <button mat-button (click)="openDialogAllOrders()" >Historial de pedidos</button>
+        <button mat-button (click)="openDialogUserOrders()" >Historial de pedidos</button>        
+
         <button mat-button (click)="logout()" >Salir</button>        
     </mat-toolbar>
+
+    <!--Menú admin-->
+    <mat-toolbar *ngIf ="isAdmin() == true">
+        <button mat-icon-button aria-label="abrir menú">
+            <mat-icon>menu</mat-icon>            
+        </button>        
+        <span>MiVenta</span>        
+        
+        <!--Botón de crud productos-->
+        <button mat-button [matMenuTriggerFor]="menuProductos">Productos</button>
+        <mat-menu #menuProductos>
+            <button mat-menu-item [routerLink]="['/product']">Agregar</button>
+            <button mat-menu-item>Editar</button>
+            <button mat-menu-item>Eliminar</button>
+        </mat-menu>
+        
+        <button mat-button (click)="openDialogAllOrders()">Pedidos</button>        
+
+        <button mat-button (click)="logout()" >Salir</button>        
+    </mat-toolbar>
+
 </div>

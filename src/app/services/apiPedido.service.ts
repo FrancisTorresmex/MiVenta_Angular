@@ -8,13 +8,18 @@ import { Response } from '../models/response';
 })
 export class ApiPedidoService {
 
-    url: string = 'https://localhost:44372/api/Pedido/Usuario'    
+    url: string = 'https://localhost:44372/api/Pedido'    
 
     constructor(private _http: HttpClient) {}
 
     //Petición a la api de ver historial de pedidos del usuario en sesión
     getOrders( id: number, pag: number ): Observable<Response> {
-        return this._http.get<Response>(`${this.url}?id=${id}&pag=${pag}`);
+        return this._http.get<Response>(`${this.url}/Usuario?id=${id}&pag=${pag}`);
+    }
+
+    //Petición a la api de ver todos los pedidos (admin)
+    getAllOrders( pag: number ): Observable<Response> {
+        return this._http.get<Response>(`${this.url}/Administrador?pag=${pag}`);
     }
 
 }

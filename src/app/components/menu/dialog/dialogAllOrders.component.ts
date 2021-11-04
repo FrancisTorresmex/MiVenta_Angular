@@ -1,42 +1,65 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { ApiPedidoService } from '../../../services/apiPedido.service';
 import { Orders } from '../../../models/orders';
-import { MatDialogRef } from '@angular/material/dialog';
 
+
+//Dialgo para ver todos los pedidos (admin)
 
 @Component({
     templateUrl: 'dialogAllOrders.component.html'
 })
 export class DialogAllOrders {
 
-    //convierto los datos de mi local storage en un objeto {id:x, rol:x...etc} para poder usar la id
-    localObject = JSON.parse(localStorage.getItem('miUser') as string);    
-
-    myOrders!:Orders[]; //para guardar el historial de pedidos recibidos del servicio
+    page: number; 
+    allOrders: Orders[]; //variable que almacenara los datos traidos de la respuesta de la api
 
     constructor(
-        private _apiPedidoService: ApiPedidoService,
-        private _refDialog: MatDialogRef<DialogAllOrders>,
+        private _apiPedidoService: ApiPedidoService
     ) 
-    {}
-
-    ngOnInit(): void {        
-        //Le añado de parametro el id obtenido de parsear el localStorage
-        this.getAllOrders(this.localObject['id'], 1);
-    }
-
-    //Llamar al servicio para ver mi historial de ordenes
-    getAllOrders(id: number, pag: number) {
-        this._apiPedidoService.getOrders(id, pag).subscribe(resp => {
-            this.myOrders = resp.data //le asignamos a la lista la respuesta
-            console.log(this.myOrders);
-        });        
+    {
+        this.allOrders = [];
+        this.page = 1;
+        this.getAllOrders();
     }
     
+    ngOnInit(): void {}
 
-    //Cerrar el dialog
+    //Ver todos los pedidos
+    getAllOrders() {
+        this._apiPedidoService.getAllOrders(this.page).subscribe(resp => {
+            if(resp.success === 1) {                             
+                this.allOrders = resp.data; //asignamos lo que contiene resp                
+                console.log(resp);
+            }            
+        }, (error) => {
+            console.log(error);
+        });
+    }
+
+    //Pasar a la siguiente página de pedidos
+    nextPag(el:HTMLElement) {        
+        this.scroll(el);
+        this.page = ++this.page; //cada vez que se presiona el botón siguiente, se suma uno a page
+        this.getAllOrders(); //se recarga el metodo        
+    }
+
+    //Volver una página de pedidos
+    previousPag(el:HTMLElement) {
+        this.scroll(el);
+        this.page = --this.page;
+        this.getAllOrders();
+    }
+
+
+    //Hacer scroll de nuevo al inicio de la card
+    scroll(el:HTMLElement) {
+        el.scrollIntoView();                
+    }
+
+
+    //cerrar dialog
     close() {
-        this._refDialog.close();
+
     }
 
 }

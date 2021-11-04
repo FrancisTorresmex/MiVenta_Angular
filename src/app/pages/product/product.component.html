@@ -1,0 +1,22 @@
+<app-menu></app-menu>
+
+<div>
+
+    <button mat-button color="primary" (click)="openDialogProductAdd()">Agregar</button>
+
+    <mat-card *ngFor="let product of lstProduct">
+        <mat-card-title>{{product.nombre}}</mat-card-title>
+
+        <mat-card-content>
+            <p>${{product.precioUnitario}} M.X</p>
+            <p>{{product.existencia == 1 ? 'Disponible': 'Agotado'}}</p>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-button color="primary" (click)="openDialogProductEdit( product )">Modificar</button>
+            <button mat-button color="warn">Eliminar</button>
+        </mat-card-actions>
+    </mat-card>
+
+</div>
+

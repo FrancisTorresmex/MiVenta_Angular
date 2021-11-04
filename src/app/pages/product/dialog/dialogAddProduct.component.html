@@ -1,0 +1,27 @@
+<form [formGroup]="productForm" (ngSubmit)="add()">
+
+    <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input type="text" matInput formControlName="nombre">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Precio C/U</mat-label>
+        <input type="number" matInput formControlName="precioUnitario">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>existencia</mat-label>
+        <input type="number" matInput formControlName="existencia">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Url de imagen</mat-label>
+        <input type="text" matInput formControlName="url">
+    </mat-form-field>
+
+    <button type="submit" mat-button color="primary" [disabled]="!productForm.valid">Agregar</button>
+
+</form>
+
+<button mat-button color="basic">Cancelar</button>

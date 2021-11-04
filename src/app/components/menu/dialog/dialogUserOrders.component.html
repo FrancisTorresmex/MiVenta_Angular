@@ -1,15 +1,12 @@
-<h3 mat-dialog-title >Todos los pedidos</h3>
+<h3 mat-dialog-title>Historial de pedidos</h3>
 
 <div mat-dialog-content>
 
-    <p #titulo></p>
-
-    <mat-card *ngFor="let orders of allOrders">
+    <mat-card *ngFor="let orders of myOrders">
         
         <mat-card-title>Id de venta: {{orders.idVenta}}</mat-card-title>
-        <p> Usuario ID: {{orders.idUsuario}}</p>                
-        <p> Fecha: {{orders.fecha}} </p>
         <h3>Total: ${{orders.total}} M.X</h3>
+        <p>Fecha de pedido: {{orders.fecha}}</p>
 
         <mat-card-content>
 
@@ -27,12 +24,12 @@
             <p>Calle: {{orders.laDireccion.calle}}</p>
             <p>Numero: {{orders.laDireccion.numero}}</p>
 
-        </mat-card-content>        
+        </mat-card-content>
 
-    </mat-card>        
+    </mat-card>    
 
 </div>
 
-<!--botones para pasar página-->
-<button mat-button color="primary" (click)="previousPag(titulo)" *ngIf="page > 1">Anterior</button>
-<button mat-button color="primary" (click)="nextPag(titulo)" *ngIf="allOrders.length > 0">Siguiente</button>
+<mat-dialog-actions>
+    <button mat-button color="primary" (click)="close()">Cerrar</button>
+</mat-dialog-actions>

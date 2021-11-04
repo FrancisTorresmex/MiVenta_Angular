@@ -26,12 +26,14 @@ export class HomeComponent implements OnInit {
       private _apiProductoService: ApiProductoService,
       private _dialog: MatDialog,       
       private _mySnackBar : MySnackBarService
-      ) {                  
+      ) {
+        this.getProduct(1);
+        console.log('se inicio');                  
       }
 
   ngOnInit(): void {        
     this.getProduct( 1 ); //cada que inicie se ejecuta el método       
-    this.cart = []; //inicializo la lista    
+    this.cart = []; //inicializo la lista        
   }
 
   //Obtener datos del servicio
@@ -43,6 +45,8 @@ export class HomeComponent implements OnInit {
         this._mySnackBar.createMySnackBar(resp.message, 'error'); //si la resp es 0, mandamos el mensaje de error recibido de la api
       }
       console.log(resp);                        
+    }, (error)=> {
+      this._mySnackBar.createMySnackBar('Vérifica tu conexión a internet.', 'error');      
     });
   }
 

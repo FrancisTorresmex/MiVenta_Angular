@@ -5,6 +5,7 @@ import { Concept } from '../../models/concept';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogShoppingCart } from '../../pages/home/dialog/dialogShoppingCart.component';
 import { CartProduct } from '../../models/cartProduct';
+import { DialogUserOrders } from './dialog/dialogUserOrders.component';
 import { DialogAllOrders } from './dialog/dialogAllOrders.component';
 
 
@@ -21,7 +22,15 @@ export class MenuComponent implements OnInit {
 
   @Output() newDataCart: EventEmitter<CartProduct[]> = new EventEmitter; //para comunicar si algo se borro en el carrito y lo mandamos al home.component.ts (para repmplazar ahi esa lista por la nueva)
 
-  constructor( private apiLoginService: ApiLoginService, private router: Router, private _dialog: MatDialog ) {}
+  isAdm: boolean =  false;
+
+  constructor( 
+    private apiLoginService: ApiLoginService, 
+    private router: Router, 
+    private _dialog: MatDialog ) 
+    {
+      this.isAdmin();      
+    }
 
   ngOnInit(): void {}  
 
@@ -29,7 +38,7 @@ export class MenuComponent implements OnInit {
   openDialogShopping() {
       const dialogRef = this._dialog.open(DialogShoppingCart, {
           width: this.width,
-          data: this.dataCart, //envia de data al dialog, lo que contiene la cariable dataCart          
+          data: this.dataCart, //envia de data al dialog, lo que contiene la variable dataCart          
       });
       dialogRef.afterClosed().subscribe(result => {
         if(result != null) { //si el result que viene de respuesta del dialog no es null, modificamos la lista, ya que se elimino algun producto del carrito
@@ -40,8 +49,16 @@ export class MenuComponent implements OnInit {
       })           
   }
 
+  //abrir dialog de ver ordenes (usuario en sesión)
+  openDialogUserOrders() {
+    const dialogRef = this._dialog.open( DialogUserOrders, {
+      width: this.width,
+    });
+  }
+
+  //abrir dialog de ver todas las ordenes (admin)
   openDialogAllOrders() {
-    const dialogRef = this._dialog.open( DialogAllOrders, {
+    const dialogRef = this._dialog.open(DialogAllOrders, {
       width: this.width,
     });
   }
@@ -51,5 +68,17 @@ export class MenuComponent implements OnInit {
     this.apiLoginService.logout();
     this.router.navigate(['/login']);
   }
+
+  //para mostrar el menu de rol normal o admin
+  isAdmin() {
+    var x = JSON.parse(localStorage.getItem('miUser')!);
+    var isAdmin = x['rol'];
+
+    if(isAdmin === "admin") {
+      return  true;
+    }
+    return false;
+  }
+
 
 }
