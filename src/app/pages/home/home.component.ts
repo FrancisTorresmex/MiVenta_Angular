@@ -16,9 +16,11 @@ import { MySnackBarService } from '../../tools/snackBar.service';
 })
 export class HomeComponent implements OnInit {
 
-  public lst!: any[];
+  public lst: any[];
 
   public cart!: CartProduct[]; //lista temporal que almacenara todo lo que vayamos añadiendo al carrito (conceptos: id del producto, cantidad etc)
+
+  page: number; //Página de la api de productos a mostrar
   
   readonly width: string = '300px'; //tamaño de dialog
 
@@ -27,18 +29,17 @@ export class HomeComponent implements OnInit {
       private _dialog: MatDialog,       
       private _mySnackBar : MySnackBarService
       ) {
-        this.getProduct(1);
-        console.log('se inicio');                  
+        this.lst = [];
+        this.cart = []; //inicializo la lista        
+        this.page = 1;
+        this.getProduct();        
       }
 
-  ngOnInit(): void {        
-    this.getProduct( 1 ); //cada que inicie se ejecuta el método       
-    this.cart = []; //inicializo la lista        
-  }
+  ngOnInit(): void {}
 
   //Obtener datos del servicio
-  getProduct( pagina : number ) {
-    this._apiProductoService.getProduct( pagina ).subscribe(resp => {
+  getProduct() {
+    this._apiProductoService.getProduct( this.page ).subscribe(resp => {
       this.lst = resp.data; //lst se le asigna lo que venga en resp.data      
 
       if(resp.success == 0) {
@@ -51,9 +52,32 @@ export class HomeComponent implements OnInit {
   }
 
 
+  //Pasar a la siguiente página de la lista de productos
+  nextPage() {
+    this.page = ++this.page;
+    this.getProduct();
+  }
+
+
+  //Pasar a la anterior página de la lista de productos
+  previousPage() {
+    this.page = --this.page;
+    this.getProduct();
+  }
+
+
   f($event: CartProduct[]) {
     this.cart = $event;
   }
+
+  //mostrar inicio de administrador
+  homeAdmin() {
+    var isAdmin = JSON.parse(localStorage.getItem("miUser") as string);
+    if (isAdmin['rol'] == "admin") return true;
+    
+    return false;
+  }
+
   
   //abrir dialog product
   openDialogProduct( product: Product ) {
@@ -62,7 +86,7 @@ export class HomeComponent implements OnInit {
       data: product //la data que recibira el dialog       
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.getProduct( 1 ); //una vez que se cierre el dialog, volvemos a ejecutar el metodo getProduct            
+      this.getProduct(); //una vez que se cierre el dialog, volvemos a ejecutar el metodo getProduct            
       //me interesa insertar en la lista por ejemplo 0: {cantidad: 0, precioUnitario: 56.5, nombre: 'botella de café'}  (si el result no es null obvio)  
       if(result != null){
         this.cart.push(result.data[0]); //agregamos a la lista concept lo que recibamos del dialog (en este caso el concepto del producto (cantidad, precio, id etc)), solo quiero la data (la data es algo de sistema al hacer push luego d eun subscribe)

@@ -1,19 +1,35 @@
 <!--a la variable dataConcept de menú le asigno lo que contenga cart, en este caso la lista de productos que a agregado el usuario-->
 <app-menu [dataCart]="cart" (newDataCart)="f($event)"></app-menu>
 
+<!--Home normal-->
+<div *ngIf="homeAdmin() == false">
+    <div>
+        <mat-card *ngFor="let item of lst">
+            <mat-card-title>{{item.nombre}}</mat-card-title>
+            <mat-card-content>$ {{item.precioUnitario}} M.X</mat-card-content>
 
+            <p>{{item.existencia == 1 ? 'Disponible' : 'No disponible'}}</p>
 
-<div>
-    <mat-card *ngFor="let item of lst">
-        <mat-card-title>{{item.nombre}}</mat-card-title>
-        <mat-card-content>$ {{item.precioUnitario}} M.X</mat-card-content>
+            <mat-card-actions>
+                <button mat-button color="primary" (click)="openDialogProduct(item)" *ngIf="item.existencia == 1">Agregar</button>
+            </mat-card-actions>
         
-        <p>{{item.existencia == 1 ? 'Disponible' : 'No disponible'}}</p>
+        </mat-card>    
 
-        <mat-card-actions>
-            <button mat-button color="primary" (click)="openDialogProduct(item)">Agregar</button>
-        </mat-card-actions>
-    
-    </mat-card>    
+        <button mat-button color="primary" (click)="previousPage()" *ngIf="page > 1">Anterior</button>
+        <button mat-button color="primary" (click)="nextPage()" *ngIf="lst.length > 0">Siguiente</button>
+    </div>
 </div>
+
+
+<!--Home admin-->
+<mat-card class="cardAdmin">
+    <mat-card-title>Hola administrador, ¿que haremos hoy?</mat-card-title>    
+</mat-card>    
+
+
+
+
+
+
 

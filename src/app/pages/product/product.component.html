@@ -2,10 +2,14 @@
 
 <div>
 
-    <button mat-button color="primary" (click)="openDialogProductAdd()">Agregar</button>
+    <button mat-flat-button color="primary" (click)="openDialogProductAdd()" class="button">Agregar</button>
 
-    <mat-card *ngFor="let product of lstProduct">
+    <mat-card *ngFor="let product of lstProduct" class="card">
         <mat-card-title>{{product.nombre}}</mat-card-title>
+        
+        <mat-card-header>
+            <img src="{{product.url}}" class="img">
+        </mat-card-header>
 
         <mat-card-content>
             <p>${{product.precioUnitario}} M.X</p>
@@ -20,8 +24,8 @@
 
 </div>
 
-<div>    
-    <button mat-button color="primary" (click)="previousPage()" *ngIf="page > 1">Anterior</button>
-    <button mat-button color="primary" (click)="nextPage()" *ngIf="lstProduct.length > 0">Siguiente</button>
+<div class="buttons">    
+    <button mat-flat-button color="primary" (click)="previousPage()" *ngIf="page > 1" class="button">Anterior</button>
+    <button mat-flat-button color="primary" (click)="nextPage()" *ngIf="lstProduct.length > 0" class="button">Siguiente</button>
 </div>
 

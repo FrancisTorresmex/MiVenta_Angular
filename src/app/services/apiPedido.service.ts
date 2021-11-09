@@ -17,6 +17,11 @@ export class ApiPedidoService {
         return this._http.get<Response>(`${this.url}/Usuario?id=${id}&pag=${pag}`);
     }
 
+    //Buscar un pedido (administrador)
+    searchOrderAdmin( id: number ): Observable<Response> {
+        return this._http.get<Response>(`${this.url}/Administrador/Search/Orders?id=${id}`)
+    }
+
     //Petición a la api de ver todos los pedidos (admin)
     getAllOrders( pag: number ): Observable<Response> {
         return this._http.get<Response>(`${this.url}/Administrador?pag=${pag}`);

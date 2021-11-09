@@ -1,29 +1,33 @@
 <h3>{{product == null? 'Agregar producto' : 'Editar producto'}}</h3>
 
-<form [formGroup]="productForm" (ngSubmit)="product == null ? add() : edit()">
+<form [formGroup]="productForm" (ngSubmit)="product == null ? add() : edit()" class="form">
 
-    <mat-form-field>
+    <mat-form-field class="form-field">
         <mat-label>Nombre</mat-label>
         <input type="text" matInput formControlName="nombre">
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="form-field">
         <mat-label>Precio C/U</mat-label>
         <input type="number" matInput formControlName="precioUnitario">
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="form-field">
         <mat-label>existencia</mat-label>
-        <input type="number" matInput formControlName="existencia">
+        <input type="number" matInput formControlName="existencia" placeholder="1 = En existencia, 2 = Agotado">
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="form-field">
         <mat-label>Url de imagen</mat-label>
         <input type="text" matInput formControlName="url">
     </mat-form-field>
 
-    <button type="submit" mat-button color="primary" [disabled]="!productForm.valid">{{product == null ? 'Agregar' : 'Modificar'}}</button>
+    <div class="button">
+        <button type="submit" mat-button color="primary" [disabled]="!productForm.valid">{{product == null ? 'Agregar' : 'Modificar'}}</button>
+    </div>    
 
 </form>
 
-<button mat-button color="basic"(click)="close()">Cancelar</button>
+<div class="button">
+    <button mat-button color="basic"(click)="close()">Cancelar</button>
+</div>

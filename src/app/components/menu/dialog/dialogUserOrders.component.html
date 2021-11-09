@@ -2,6 +2,8 @@
 
 <div mat-dialog-content>
 
+    <p #incioProductos></p>
+
     <mat-card *ngFor="let orders of myOrders">
         
         <mat-card-title>Id de venta: {{orders.idVenta}}</mat-card-title>
@@ -31,5 +33,8 @@
 </div>
 
 <mat-dialog-actions>
+    <button mat-button color="primary" (click)="previousPage(incioProductos)" *ngIf="page > 1">Anterior</button>
+    <button mat-button color="primary" (click)="nextPage(incioProductos)" *ngIf="myOrders.length > 0">Siguiente</button>
+
     <button mat-button color="primary" (click)="close()">Cerrar</button>
 </mat-dialog-actions>

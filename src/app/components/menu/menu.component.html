@@ -20,16 +20,10 @@
         </button>        
         <span>MiVenta</span>        
         
-        <!--Botón de crud productos-->
-        <button mat-button [matMenuTriggerFor]="menuProductos">Productos</button>
-        <mat-menu #menuProductos>
-            <button mat-menu-item [routerLink]="['/product']">Agregar</button>
-            <button mat-menu-item>Editar</button>
-            <button mat-menu-item>Eliminar</button>
-        </mat-menu>
-        
-        <button mat-button (click)="openDialogAllOrders()">Pedidos</button>        
+        <button mat-button [routerLink]="['/home']" >Inicio</button>
 
+        <button mat-button [routerLink]="['/product']">Productos</button>                
+        <button mat-button (click)="openDialogAllOrders()">Pedidos</button>        
         <button mat-button (click)="logout()" >Salir</button>        
     </mat-toolbar>
 

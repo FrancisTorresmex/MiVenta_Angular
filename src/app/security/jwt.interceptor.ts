@@ -18,7 +18,7 @@ export class JwtInterceptor implements HttpInterceptor{
           const user =   this._apiLogin.userData; //el metodo usuarioData regresa null o el valor según exista sesión o no
           if (user) { //si no es null            
               req = req.clone({ //clonamos todo lo que ya tenga esa request (exito, mensaje, data)
-                    setHeaders: {
+                    setHeaders: {                        
                         Authorization: `Bearer ${user.token}` //le agrego a la clonacion el header de token 
                     }
               });

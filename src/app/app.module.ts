@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
-import { HomeAdminComponent } from './pages/home/admin/home-admin/home-admin.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { DialogProductComponent } from './pages/home/dialog/dialogProduct.component';
@@ -70,8 +69,7 @@ import { ProductComponent } from './pages/product/product.component'; //menú ma
     DialogAllOrders,
     MenuComponent,
     SaleComponent,
-    NotFoundComponent,
-    HomeAdminComponent,
+    NotFoundComponent,    
     ProductComponent,
     DialogAddProduct,    
     DialogConfirmDelete,

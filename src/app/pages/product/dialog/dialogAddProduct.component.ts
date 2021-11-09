@@ -7,7 +7,8 @@ import { Product } from 'src/app/models/product';
 
 
 @Component({
-    templateUrl: 'dialogAddProduct.component.html'
+    templateUrl: 'dialogAddProduct.component.html',
+    styleUrls: ['./dialogAddProduct.component.scss']
 })
 export class DialogAddProduct {
 

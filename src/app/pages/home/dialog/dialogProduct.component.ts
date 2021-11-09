@@ -17,8 +17,7 @@ export class DialogProductComponent {
     public cart: CartProduct[];
             
     quantity: number = 0;      //variable para la cantidad de articulos de ese producto 
-    payment: number = 1000;  //por ahora el importe defecto es 1000, AÚN ESTA PENDIENTE AUTOMATIZAR
-    
+    payment: number = 1000;  //por ahora el importe defecto es 1000, AÚN ESTA PENDIENTE AUTOMATIZAR        
 
     constructor(
             private dialogRef: MatDialogRef<DialogProductComponent>, //en el constructor se encuentra mi objeto de MatDialogRef el cual es del tipo de esta misma clase para que se pueda cerrar el mismo, o asi                        
@@ -26,7 +25,7 @@ export class DialogProductComponent {
             @Inject(MAT_DIALOG_DATA) public product: Product //lo que recibe este dialog de otros componentes
         ) {
             //inicializo la lista
-            this.cart = [];
+            this.cart = [];            
         }
 
     ngOnInit(): void {}

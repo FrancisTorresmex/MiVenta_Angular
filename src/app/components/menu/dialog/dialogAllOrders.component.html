@@ -1,38 +1,51 @@
-<h3 mat-dialog-title >Todos los pedidos</h3>
+<h3 mat-dialog-title class="titulo"> Todos los pedidos</h3>          
+   
+    <mat-form-field appearance="outline" class="form">
+        <mat-label class="labelSearch">Buscar</mat-label>        
+        <input type="number" matInput placeholder="ID de la venta" [(ngModel)]="idSearch" class="inputSearch">                    
+    </mat-form-field>
+    
+    <button mat-icon-button class="iconSearch" (click)="searchOrders()">
+        <mat-icon>search</mat-icon>
+    </button>
 
-<div mat-dialog-content>
+<div mat-dialog-content class="todo">
 
-    <p #titulo></p>
+    <p #titulo></p>                    
 
     <mat-card *ngFor="let orders of allOrders">
+
+        <p class="espacio"></p>
         
-        <mat-card-title>Id de venta: {{orders.idVenta}}</mat-card-title>
+        <mat-card-title class="titleCard">ID de venta: {{orders.idVenta}}</mat-card-title>
         <p> Usuario ID: {{orders.idUsuario}}</p>                
         <p> Fecha: {{orders.fecha}} </p>
         <h3>Total: ${{orders.total}} M.X</h3>
 
-        <mat-card-content>
-
-            <h4>----Productos----</h4>
+        <mat-card-content>            
+            <h4 class="subtitulo">Productos</h4>
             <div *ngFor="let u of orders.losConceptos; let i = index">                
                 <p> Producto: {{orders.losConceptos[i].nombreProducto}}</p>
                 <p> Cantidad: {{orders.losConceptos[i].cantidad}}</p>
-                <p> Precio c/u: {{orders.losConceptos[i].precioUnitario}}</p>
-                <p>-----------------------------</p>
+                <p> Precio c/u: {{orders.losConceptos[i].precioUnitario}}</p>                
+                <p>------------------------</p>
             </div>            
 
-            <h4>----Dirección de envio----</h4>
+            <h4 class="subtitulo">Dirección de envio</h4>
             <p>Estado: {{orders.laDireccion.estado}}</p>
             <p>Colonia: {{orders.laDireccion.colonia}}</p>
             <p>Calle: {{orders.laDireccion.calle}}</p>
-            <p>Numero: {{orders.laDireccion.numero}}</p>
+            <p>Numero: {{orders.laDireccion.numero}}</p>            
+        </mat-card-content>                
 
-        </mat-card-content>        
-
-    </mat-card>        
+    </mat-card>            
 
 </div>
+
+
 
 <!--botones para pasar página-->
 <button mat-button color="primary" (click)="previousPag(titulo)" *ngIf="page > 1">Anterior</button>
 <button mat-button color="primary" (click)="nextPag(titulo)" *ngIf="allOrders.length > 0">Siguiente</button>
+
+<button mat-button color="primary" (click)="close()">Cerrar</button>
