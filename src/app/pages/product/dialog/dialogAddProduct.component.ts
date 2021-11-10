@@ -58,7 +58,7 @@ export class DialogAddProduct {
             this._mySnackBar.createMySnackBar(resp.message, 'error');
           }
         }, (error) => {
-          console.log(error);
+          this._mySnackBar.createMySnackBar('Vérifica que estes concetado a internet', 'error');
       });
     }
 
@@ -71,6 +71,8 @@ export class DialogAddProduct {
         }else{
           this._mySnackBar.createMySnackBar(resp.message, 'error');
         }
+      }, (error) => {
+        this._mySnackBar.createMySnackBar('Vérifica que estes concetado a internet', 'error');
       });
     }
 

@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
 
   public lst: any[];
 
+  breakpoint: any
+
   public cart!: CartProduct[]; //lista temporal que almacenara todo lo que vayamos añadiendo al carrito (conceptos: id del producto, cantidad etc)
 
   page: number; //Página de la api de productos a mostrar
@@ -35,7 +37,9 @@ export class HomeComponent implements OnInit {
         this.getProduct();        
       }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 6;
+  }
 
   //Obtener datos del servicio
   getProduct() {
@@ -78,6 +82,10 @@ export class HomeComponent implements OnInit {
     return false;
   }
 
+  //Mostrar gird según tamaño de pantalla
+  onResize(event: any) {
+    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 6;
+  }
   
   //abrir dialog product
   openDialogProduct( product: Product ) {

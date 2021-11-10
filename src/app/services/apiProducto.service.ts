@@ -3,6 +3,8 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Response } from '../models/response';
 import { Product } from '../models/product';
+import { _isNumberValue } from '@angular/cdk/coercion';
+import { EsNumero } from '../tools/esNumero';
 
 
 const httpOption = { //Headers (el token esta en los guard)
@@ -42,5 +44,10 @@ export class ApiProductoService {
     deleteProduct( id: number ): Observable<Response> {
         return this._http.delete<Response>(`${this.url}?id=${id}`);
     }
+
+    //Buscar producto por ID o nombre (admin, normal)
+    searchProduct(search: any): Observable<Response> {       
+        return this._http.get<Response>(`${this.url}/Search?article=${search}`);        
+    }    
 
 }

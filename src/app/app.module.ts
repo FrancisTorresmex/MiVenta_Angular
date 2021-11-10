@@ -41,10 +41,9 @@ import { MatFormFieldModule } from '@angular/material/form-field'; //forms mater
 import { MatToolbarModule } from '@angular/material/toolbar'; //tolbar material
 import { MatIconModule } from '@angular/material/icon'; //iconos material
 import { MatSnackBarModule } from '@angular/material/snack-bar'; //snackbar material
-import {MatGridListModule} from '@angular/material/grid-list'; 
+import {MatGridListModule} from '@angular/material/grid-list';  //Gird material
 import { MatMenuModule } from '@angular/material/menu';
 import { ProductComponent } from './pages/product/product.component'; //menú material
-
 
 
 

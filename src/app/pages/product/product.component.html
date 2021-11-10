@@ -2,7 +2,24 @@
 
 <div>
 
-    <button mat-flat-button color="primary" (click)="openDialogProductAdd()" class="button">Agregar</button>
+    <mat-grid-list cols="2" rowHeight="100px">
+        <mat-grid-tile>            
+            <button mat-icon-button class="buttonSearch" (click)="openDialogProductAdd()">
+                <mat-icon class="iconSearch">add</mat-icon>
+            </button>            
+        </mat-grid-tile>        
+
+        <mat-grid-tile>
+            <mat-form-field class="formSearch">
+                <mat-label class="labelSearch">Buscar</mat-label>
+                <input matInput placeholder="Nombre o ID del producto" [(ngModel)]="search" class="inputSearch">       
+            </mat-form-field>
+        
+            <button mat-icon-button class="buttonSearch" (click)="searchProduct()">
+                <mat-icon class="iconSearch">search</mat-icon>
+            </button>
+        </mat-grid-tile>
+    </mat-grid-list>    
 
     <mat-card *ngFor="let product of lstProduct" class="card">
         <mat-card-title>{{product.nombre}}</mat-card-title>

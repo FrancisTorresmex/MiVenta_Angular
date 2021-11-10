@@ -18,13 +18,17 @@ export class ProductComponent implements OnInit {
 
   lstProduct: Product[]; //lista donde se guarda todo lo recibido al cargar todos los productos
 
+  //input del formulario para buscar productos (any porque puede ser number o string)
+  search: any;  
+
   readonly width: string = '600px'; //medida del dialog
 
   constructor(
     private _apiProductoService: ApiProductoService,
+    private _mySnackBar: MySnackBarService,
     private _dialog: MatDialog,
   ) 
-  {         
+  {            
     this.lstProduct = [];       
     this.page = 1;
     this.getProduct();         
@@ -35,7 +39,13 @@ export class ProductComponent implements OnInit {
   //Obtener los productos
   getProduct() {
     this._apiProductoService.getProduct(this.page).subscribe(result => {
-      this.lstProduct = result.data;
+      if(result.success === 1) {
+        this.lstProduct = result.data;
+      }else{
+        this._mySnackBar.createMySnackBar(result.message, 'error');
+      }      
+    }, (error) => {
+      this._mySnackBar.createMySnackBar('Vérifica que estes concectado a internet', 'error');
     });
   }
 
@@ -50,6 +60,22 @@ export class ProductComponent implements OnInit {
   previousPage() {
     this.page = --this.page;
     this.getProduct();
+  }
+
+
+  //Buscar articulos por id o nombre
+  searchProduct() {
+    this._apiProductoService.searchProduct(this.search).subscribe(resp => {
+      if (resp.success === 1) {
+        console.log(resp);
+        this.lstProduct = resp.data;
+      }else{
+        this._mySnackBar.createMySnackBar(resp.message, 'error');
+      }
+    }, (error) => {
+      console.log(error);
+      this._mySnackBar.createMySnackBar('f', 'error');
+    })
   }
 
 
