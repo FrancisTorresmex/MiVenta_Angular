@@ -1,4 +1,12 @@
-<h3 mat-dialog-title>Historial de pedidos</h3>
+<h3 mat-dialog-title class="titulo">Historial de pedidos</h3>
+
+<mat-form-field appearance="outline">
+    <mat-label>Buscar pedido</mat-label>
+    <input type="number" matInput placeholder="ID de pedido" [(ngModel)]="searchOrder">
+</mat-form-field>    
+<button mat-icon-button class="buttonSearch" (click)="searchOrderUser()">
+    <mat-icon class="iconSearch">search</mat-icon>
+</button>            
 
 <div mat-dialog-content>
 
@@ -6,13 +14,13 @@
 
     <mat-card *ngFor="let orders of myOrders">
         
-        <mat-card-title>Id de venta: {{orders.idVenta}}</mat-card-title>
+        <mat-card-title>ID: {{orders.idVenta}}</mat-card-title>
         <h3>Total: ${{orders.total}} M.X</h3>
         <p>Fecha de pedido: {{orders.fecha}}</p>
 
         <mat-card-content>
 
-            <h4>----Productos----</h4>
+            <h4 class="subTitulo">Productos</h4>
             <div *ngFor="let u of orders.losConceptos; let i = index">                
                 <p> Producto: {{orders.losConceptos[i].nombreProducto}}</p>
                 <p> Cantidad: {{orders.losConceptos[i].cantidad}}</p>
@@ -20,7 +28,7 @@
                 <p>-----------------------------</p>
             </div>            
 
-            <h4>----Dirección de envio----</h4>
+            <h4 class="subTitulo">Dirección de envio</h4>
             <p>Estado: {{orders.laDireccion.estado}}</p>
             <p>Colonia: {{orders.laDireccion.colonia}}</p>
             <p>Calle: {{orders.laDireccion.calle}}</p>
@@ -28,11 +36,11 @@
 
         </mat-card-content>
 
-    </mat-card>    
+    </mat-card>        
 
 </div>
 
-<mat-dialog-actions>
+<mat-dialog-actions>   
     <button mat-button color="primary" (click)="previousPage(incioProductos)" *ngIf="page > 1">Anterior</button>
     <button mat-button color="primary" (click)="nextPage(incioProductos)" *ngIf="myOrders.length > 0">Siguiente</button>
 

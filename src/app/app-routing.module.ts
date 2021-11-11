@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent}, // este no lleva el CanActive porque ha este si pueden acceder
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},  //para entrar aqui necesita cumplir con el canActive creado (en este caso estar logeado)      
-  {path: 'product', component: ProductComponent, canActivate: [AuthGuard, RoleGuard]},
+  {path: 'product', component: ProductComponent, canActivate: [AuthGuard, RoleGuard]}, //RoleGuard es mi guard creado para que solo entren personas con rol admin en ese apartado
 
   { path: '', redirectTo: '/login' , pathMatch: 'full'},
   { path: '**', component: NotFoundComponent },

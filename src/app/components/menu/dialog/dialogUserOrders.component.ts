@@ -2,10 +2,12 @@ import { Component, Inject } from '@angular/core';
 import { ApiPedidoService } from '../../../services/apiPedido.service';
 import { Orders } from '../../../models/orders';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MySnackBarService } from '../../../tools/snackBar.service';
 
 
 @Component({
-    templateUrl: 'dialogUserOrders.component.html'
+    templateUrl: 'dialogUserOrders.component.html',
+    styleUrls: ['./dialogUserOrders.component.scss']
 })
 export class DialogUserOrders {
 
@@ -16,8 +18,11 @@ export class DialogUserOrders {
 
     myOrders:Orders[]; //para guardar el historial de pedidos recibidos del servicio
 
+    searchOrder!: number; //para buscar una orden en el historial del usuario (de ese mismo usuario en sesión)
+
     constructor(
         private _apiPedidoService: ApiPedidoService,
+        private _mySncakBar: MySnackBarService,
         private _refDialog: MatDialogRef<DialogUserOrders>,
     ) 
     {
@@ -31,9 +36,32 @@ export class DialogUserOrders {
     //Llamar al servicio para ver mi historial de ordenes
     getAllOrders() {
         this._apiPedidoService.getOrders(this.localObject['id'], this.page).subscribe(resp => {
-            this.myOrders = resp.data //le asignamos a la lista la respuesta
-            console.log(this.myOrders);
+            if (resp.success === 1) {
+                this.myOrders = resp.data //le asignamos a la lista la respuesta    
+                // console.log(this.myOrders);
+            }else{
+                this._mySncakBar.createMySnackBar(resp.message, 'error');
+            }                     
+        }, (error) => {
+            this._mySncakBar.createMySnackBar('Vérifica tu conexión a internet', 'error');
         });        
+    }
+
+
+    searchOrderUser() {
+        this._apiPedidoService.searchOrderUser(this.localObject['id'], this.searchOrder).subscribe(resp => {
+            if (resp.success === 1) {                
+                this.myOrders = resp.data;
+                if (this.myOrders.length <= 0) {
+                    this._mySncakBar.createMySnackBar('Pedido no encontrado, vérifica que la ID sea la correcta.', 'error');    
+                    this.getAllOrders(); //cargamos de nuevo todas las ordenes para evitar pantalla en blanco al no encontrar lo buscado
+                }
+            }else{
+                this._mySncakBar.createMySnackBar(resp.message, 'error');
+            }
+        }, (error) => {
+            this._mySncakBar.createMySnackBar('Vérifica tu concexión a internet', 'error');
+        });
     }
 
 

@@ -1,8 +1,8 @@
-<h3 mat-Dialog-Title>Carrito de productos</h3>
+<h3 mat-Dialog-Title class="titulo">Carrito de productos</h3>
 
 <div mat-dialog-content>
 
-   <h3 *ngIf="cart.length == 0 || cart  == []">Sin articulos aún, añade algunos productos :)</h3> <!--si al ir al carrito la lista cart no tiene nada, muestra mensaje-->
+   <h3 *ngIf="cart.length == 0 || cart  == []">Sin articulos aún, añade algunos productos (:</h3> <!--si al ir al carrito la lista cart no tiene nada, muestra mensaje-->
    
    <button mat-icon-button (click)="deleteCart()" color="warn" *ngIf="cart.length != 0">
       <mat-icon>delete_forever</mat-icon>
@@ -13,7 +13,9 @@
       <mat-dialog-content>
          <p>PrecioC/U: {{item.precioUnitario}} M.X</p>
          <p>Cantidad: {{item.cantidad}}</p>
+
       </mat-dialog-content>
+
       <mat-card-actions>
          <button mat-button color="warn"(click)="deleteProduct(item.idProducto)">Eliminar</button>
       </mat-card-actions>
@@ -21,20 +23,20 @@
 
 </div>
 
-<mat-card-actions >   
-   <!-- <button mat-button color="primary"(click)="openAddress()" *ngIf="cart.length != 0">Comprar</button>    -->
-   <button mat-button color="primary" (click)="close()" *ngIf="cart.length == 0">Regresar</button>
-</mat-card-actions>
-
+   
 <div *ngIf="cart.length != 0">
 
-   <h3 mat-dialog-title>Dirección de envio</h3>
+   <h3 mat-dialog-title class="titulo">Dirección de envio</h3>
 
    <!--enviare lo que contenga mySale a la variable myOrder de sale.component.ts-->
    <!--Recibimos la cleanLst de sale.component.ts, para reiniciar la lista del carrito si es que en sale.component.ts la respuesta a la api fue correcta-->
    <app-sale [myOrder]="mySale" (cleanLst)="clanLstCart($event)"></app-sale> 
 
 </div>
+
+   <!-- <button mat-button color="primary"(click)="openAddress()" *ngIf="cart.length != 0">Comprar</button>    -->
+   <button mat-button color="primary" (click)="close()" *ngIf="cart.length == 0">Regresar</button>
+
 
 
 

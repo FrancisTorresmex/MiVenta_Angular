@@ -13,13 +13,14 @@ import { Router } from '@angular/router';
 
 
 @Component({
-    templateUrl: 'dialogShoppingCart.component.html'
+    templateUrl: 'dialogShoppingCart.component.html',
+    styleUrls: ['./dialogShoppingCart.component.scss']
 })
 export class DialogShoppingCart {        
 
     myConcepts: Concept[]; //lista para agregar todos los conceptos
     mySale: Sale;
-    myAddress!: Address;
+    myAddress!: Address;    
 
     localObject = JSON.parse(localStorage.getItem('miUser') as string); //convierto los datos de mi local storage en un objeto {id:x, rol:x...etc} para poder usar la id
 

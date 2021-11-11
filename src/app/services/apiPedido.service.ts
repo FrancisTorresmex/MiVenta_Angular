@@ -27,4 +27,10 @@ export class ApiPedidoService {
         return this._http.get<Response>(`${this.url}/Administrador?pag=${pag}`);
     }
 
+    //Buscar un pedido (usuario normal)
+    searchOrderUser( idUser: number, idOrder: number ): Observable<Response> {
+        return this._http.get<Response>(`${this.url}/Usuario/Search/Orders?idUsuario=${idUser}&idVenta=${idOrder}`);
+    }
+    
+
 }

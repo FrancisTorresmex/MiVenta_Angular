@@ -17,6 +17,7 @@ import { DialogAllOrders } from './dialog/dialogAllOrders.component';
 export class MenuComponent implements OnInit {
 
   readonly width: string = '600px'; //para darle una medida al dialog que se abrira
+  readonly height: string = '700px';
 
   @Input() dataCart!: CartProduct[]; //para enviarla a recibir información de home.component, y regresar con esa información aqui para enviarsela luego a dialog como data
 
@@ -40,6 +41,7 @@ export class MenuComponent implements OnInit {
   openDialogShopping() {
       const dialogRef = this._dialog.open(DialogShoppingCart, {
           width: this.width,
+          height: '600px',       
           data: this.dataCart, //envia de data al dialog, lo que contiene la variable dataCart          
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -55,6 +57,7 @@ export class MenuComponent implements OnInit {
   openDialogUserOrders() {
     const dialogRef = this._dialog.open( DialogUserOrders, {
       width: this.width,
+      height: this.height
     });
   }
 

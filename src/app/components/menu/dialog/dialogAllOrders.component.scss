@@ -1,5 +1,8 @@
 .titulo {
     text-align: center;    
+    font-size: 2em;
+    background-color: purple;
+    color: white;
 }
 
 .form {      
@@ -26,6 +29,15 @@
 
 .titleCard {
     color: rgb(52, 11, 138);
+}
+
+mat-card {
+    color: white;
+    text-align: center;
+    background-color: rgb(148, 40, 198);
+    border-radius: 2em;
+    border: 2em;
+    margin-bottom: 10px;
 }
 
 .espacio {

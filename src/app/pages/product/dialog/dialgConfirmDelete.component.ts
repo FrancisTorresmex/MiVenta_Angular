@@ -6,7 +6,8 @@ import { Product } from '../../../models/product';
 
 
 @Component({
-    templateUrl: 'dialgConfirmDelete.component.html'
+    templateUrl: 'dialgConfirmDelete.component.html',
+    styleUrls: ['./dialgConfirmDelete.component.scss']
 })
 export class DialogConfirmDelete {
 

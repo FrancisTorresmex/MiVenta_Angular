@@ -16,7 +16,7 @@ export class DialogAllOrders {
     page: number; 
     allOrders: Orders[]; //variable que almacenara los datos traidos de la respuesta de la api
 
-    idSearch: number = 5; //id de venta a buscar
+    idSearch!: number; //id de venta a buscar
     lstSearch: Orders[]; //
 
     constructor(

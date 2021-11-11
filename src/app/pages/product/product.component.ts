@@ -66,9 +66,12 @@ export class ProductComponent implements OnInit {
   //Buscar articulos por id o nombre
   searchProduct() {
     this._apiProductoService.searchProduct(this.search).subscribe(resp => {
-      if (resp.success === 1) {
-        console.log(resp);
+      if (resp.success === 1) {        
         this.lstProduct = resp.data;
+        if(this.lstProduct.length <= 0) {
+          this._mySnackBar.createMySnackBar("Producto no encontrado, vérfica la ID o el nombre.", 'error');
+          this.getProduct(); //cargamos de nuevo los productos para evitar pantalla en blanco al no encontrar productos
+        }
       }else{
         this._mySnackBar.createMySnackBar(resp.message, 'error');
       }

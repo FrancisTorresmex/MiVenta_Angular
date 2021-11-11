@@ -1,4 +1,4 @@
-<h3>{{product == null? 'Agregar producto' : 'Editar producto'}}</h3>
+<h3 class="titulo">{{product == null? 'Agregar producto' : 'Editar producto'}}</h3>
 
 <form [formGroup]="productForm" (ngSubmit)="product == null ? add() : edit()" class="form">
 

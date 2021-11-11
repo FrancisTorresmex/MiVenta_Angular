@@ -9,7 +9,8 @@ import { MySnackBarService } from '../../../tools/snackBar.service';
 
 
 @Component({
-    templateUrl: 'dialogProduct.component.html'    
+    templateUrl: 'dialogProduct.component.html',
+    styleUrls: ['./dialogProduct.component.scss']    
 })
 export class DialogProductComponent {
     

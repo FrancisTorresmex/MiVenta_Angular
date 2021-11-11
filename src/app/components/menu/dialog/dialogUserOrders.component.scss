@@ -1,0 +1,33 @@
+.titulo {
+    text-align: center;
+    font-size: 1.5em;
+    color: purple;       
+}
+
+mat-form-field {
+    margin-left: 40%;
+    width: 40%;
+}
+
+.buttonSearch {
+    background-color: purple;
+    color: white;
+}
+
+.subTitulo {
+    font-size: 2.0em;
+}
+
+mat-card {
+    color: white;
+    text-align: center;
+    background-color: rgb(148, 40, 198);
+    border-radius: 2em;
+    border: 2em;
+    margin-bottom: 10px;
+}
+
+div mat-dialog-content {
+    height: 10%;
+    
+}

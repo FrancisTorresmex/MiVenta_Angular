@@ -1,24 +1,26 @@
 <!--a la variable dataConcept de menú le asigno lo que contenga cart, en este caso la lista de productos que a agregado el usuario-->
 <app-menu [dataCart]="cart" (newDataCart)="f($event)"></app-menu>
 
-<!--Buscador-->
-<mat-grid-list cols="2" rowHeight="80px" class="search">
-    <mat-grid-tile>
-        <mat-form-field class="formSearch">
-            <mat-label class="labelSearch">Buscar</mat-label>
-            <input matInput placeholder="Nombre o ID del producto" [(ngModel)]="searchArticle" class="inputSearch">       
-        </mat-form-field>                
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <button mat-icon-button class="buttonSearch" (click)="search()">
-            <mat-icon class="iconSearch">search</mat-icon>
-        </button>
-    </mat-grid-tile>
-</mat-grid-list>
-
 
 <!--Home normal-->
-<div *ngIf="homeAdmin() == false">    
+<div *ngIf="homeAdmin() == false">  
+
+        <!--Buscador-->
+        <mat-grid-list cols="2" rowHeight="80px" class="search">
+            <mat-grid-tile>
+                <mat-form-field class="formSearch">
+                    <mat-label class="labelSearch">Buscar</mat-label>
+                    <input matInput placeholder="Nombre o ID del producto" [(ngModel)]="searchArticle" class="inputSearch">       
+                </mat-form-field>                
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <button mat-icon-button class="buttonSearch" (click)="search()">
+                    <mat-icon class="iconSearch">search</mat-icon>
+                </button>
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <!--Cards-->
         <mat-grid-list cols="2" rowHeight="300px">                        
             <mat-grid-tile *ngFor="let item of lst">                        
                 <mat-card  class="card">                                
@@ -53,10 +55,3 @@
             <h3 class="cardAdmin">Hola administrador, ¿que haremos hoy?</h3>                
     </mat-grid-tile>
 </mat-grid-list>
-
-
-
-
-
-
-

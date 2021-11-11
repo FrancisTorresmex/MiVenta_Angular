@@ -89,8 +89,12 @@ export class HomeComponent implements OnInit {
     this._apiProductoService.searchProduct(this.searchArticle).subscribe(resp => {
       if (resp.success === 1) {
         this.lst = resp.data;
-      }else{
-        this._mySnackBar.createMySnackBar(resp.message, 'error');
+        if (this.lst.length <= 0) {
+          this._mySnackBar.createMySnackBar('No existe el producto buscado, intenta con un nombre distinto', 'error');
+          this.getProduct(); //recargo los productos (para evitar que la pantalla quede en blanco por no encontrar productos)
+        }        
+      }else{        
+        this._mySnackBar.createMySnackBar(resp.message, 'error');        
       }
     }, (error) => {
       this._mySnackBar.createMySnackBar("Vérifica tu conexión a internet", 'error');

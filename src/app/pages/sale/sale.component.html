@@ -20,8 +20,9 @@
         <input type="number" matInput placeholder="#945" formControlName="numero">
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit">Hacer pedido</button>    
+    <div class="buttons">
+        <button mat-raised-button color="primary" type="submit" class="button">Hacer pedido</button>    
+        <button mat-raised-button color="basic" (click)="close()" type="button" class="button">Cerrar</button> 
+    </div>    
 
-</form>
-
-<button mat-raised-button color="basic" (click)="close()">Cerrar</button>        
+</form>       

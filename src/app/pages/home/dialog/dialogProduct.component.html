@@ -1,4 +1,5 @@
-<h3 mat-dialg-title>Información del producto</h3>
+<div class="contenido">
+    <h3 mat-dialg-title class="titulo">Información del producto</h3>
 
 <div mat-dialog-content>
     {{myproduct.nombre}}
@@ -33,6 +34,9 @@
 </div>
 
 <mat-dialog-actions>
-    <button mat-button color="primary" (click)="AddToCart()" >Añadir</button>
-    <button mat-button color="basic" (click)="close()" >Regresar</button>
+    <div class="buttons">
+        <button mat-button color="primary" (click)="AddToCart()" >Añadir</button>
+        <button mat-button color="basic" (click)="close()" >Regresar</button>
+    </div>    
 </mat-dialog-actions>
+</div>
