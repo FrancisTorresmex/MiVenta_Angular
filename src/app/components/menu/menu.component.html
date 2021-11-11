@@ -1,30 +1,50 @@
 <div>
-    <!--Menú normal-->
-    <mat-toolbar *ngIf ="isAdmin() == false">
-        <button mat-icon-button aria-label="abrir menú">
-            <mat-icon>menu</mat-icon>            
-        </button>        
-        <span>MiVenta</span>
-        <a [routerLink]="['/home']" >Inicio</a>
-        
-        <button mat-button (click)="openDialogShopping()" >Mi carrito</button>
-        <button mat-button (click)="openDialogUserOrders()" >Historial de pedidos</button>        
+    
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>            
+            <button type="button" mat-icon-button (click)="sideNav.toggle() && showFiller = !showFiller" class="buttonIcon">            
+                <mat-icon class="iconMenu">menu</mat-icon>            
+            </button>
+            MiVenta
+        </mat-toolbar-row>
+    </mat-toolbar>        
+        <mat-sidenav-container>
+            <mat-sidenav mode="over" #sideNav class="example-sidenav" position="start">     
+                
+                <div class="separador"> 
+                    <mat-grid-list cols="2" rowHeight="50px">
+                        <mat-grid-tile>
+                            <h3 class="titleMenu">MENÚ</h3>
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            <button type="button" mat-icon-button (click)="sideNav.toggle() && showFiller = !showFiller" class="buttonCloseDrarwe">                                            
+                                <mat-icon>keyboard_backspace</mat-icon>                            
+                            </button>  
+                        </mat-grid-tile>
+                    </mat-grid-list>           
+                    
+                </div> 
+                <!--Botones Admin-->
+                <div *ngIf="isAdmin() == true">
+                    <button mat-button [routerLink]="['/home']" class="button">Inicio</button>           
+                    <button mat-button [routerLink]="['/product']" class="button">Productos</button>                
+                    <button mat-button (click)="openDialogAllOrders()" class="button">Pedidos</button>        
+                    <button mat-button (click)="logout()" class="button">Salir</button> 
+                </div>
+                
+                <!--Botones usuario normal-->
+                <div *ngIf="isAdmin() == false">
+                    <button mat-button [routerLink]="['/home']" class="button">Inicio</button> 
+                    <button mat-button (click)="openDialogShopping()" class="button">Mi carrito</button>
+                    <button mat-button (click)="openDialogUserOrders()" class="button">Historial de pedidos</button>
+                    <button mat-button (click)="logout()" class="button" class="button">Salir</button> 
+                </div>
 
-        <button mat-button (click)="logout()" >Salir</button>        
-    </mat-toolbar>
-
-    <!--Menú admin-->
-    <mat-toolbar *ngIf ="isAdmin() == true">
-        <button mat-icon-button aria-label="abrir menú">
-            <mat-icon>menu</mat-icon>            
-        </button>        
-        <span>MiVenta</span>        
-        
-        <button mat-button [routerLink]="['/home']" >Inicio</button>
-
-        <button mat-button [routerLink]="['/product']">Productos</button>                
-        <button mat-button (click)="openDialogAllOrders()">Pedidos</button>        
-        <button mat-button (click)="logout()" >Salir</button>        
-    </mat-toolbar>
+            </mat-sidenav>
+                
+            <mat-sidenav-content>                    
+            </mat-sidenav-content>   
+                        
+        </mat-sidenav-container>              
 
 </div>

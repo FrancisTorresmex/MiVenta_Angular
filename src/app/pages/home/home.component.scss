@@ -1,31 +1,66 @@
 * {            
     margin: 0;
     padding: 0;
-    margin-bottom: 0;
+    margin-bottom: 0;        
+}
+
+//Buscador
+.search {    
+    margin-top: 20px;    
+    margin-left: 65%;
+}
+
+.formSearch {    
+    width: 100%;
+}
+
+.inputSearch {        
+}
+
+.iconSearch {        
+    color: #fff;
+}
+
+.buttonSearch {        
+    background-color: purple;    
 }
 
 
-.cardAdmin {    
-    display: flex;
-    justify-content: center;             
-    max-width: 100%;
-    margin-top: 20%;    
-    padding: 30px;    
-    
-    text-align: center;
-    background-color: aquamarine;    
-}
+//Card de producto
 
-.divNormal {
-    
-}
-
-.card {        
-    text-align: center;
-    display: block;    
+.card {    
+    border-radius: 20px;        
+    text-align: center; 
+    background-color: white;
+    margin: 2em;       
 }
 
 .img{
     display: block;    
-    max-width: 200px;
+    max-width: 110px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+//Botones siguiente y anterior
+.buttonsPag {    
+    padding: 20px;
+    text-align: center;
+}
+
+.buttonP {
+    margin: 10px;
+}
+
+//Home Administrador
+.cardAdmin {    
+    color: #fff;
+    height: auto;
+    margin: 40px;
+    border-radius: 30px;    
+    margin-top: 20%;
+    margin-bottom: 20%;    
+    padding: 30px;        
+    text-align: center;
+    background-color: rgb(129, 48, 172);    
 }

@@ -1,0 +1,73 @@
+
+mat-toolbar {        
+    
+}
+
+mat-sidenav-container {                 
+    border-radius: 20px;
+    // max-height: .1;
+    // min-height: .1;
+    // max-width: .1;
+    width: 40%;
+    height: 100%;                                            
+}
+
+mat-sidenav {        
+    background-color: rgb(99, 26, 133);
+    margin-top: 100px;            
+    height: 100%;       
+    width: 300px;      
+    position: fixed;
+}
+
+.titulo {    
+    padding-top: 30px;
+}
+
+.buttonIcon {        
+    background-color: rgb(127, 63, 162);    
+}
+
+.iconMenu {             
+    color: #fff;    
+}
+
+
+.button {                  
+    width: 100%;
+    color: #fff;    
+}
+
+.separador {    
+    text-align: center;
+    background-color: rgb(85, 7, 159);
+    color: #fff;     
+}
+
+.buttonCloseDrarwe {    
+    margin-left: 70%;
+}
+
+.titleMenu {
+    margin-top: 15px;           
+}
+
+
+
+//---------------------------
+
+mat-drawer-container {    
+    border-radius: 20px;
+    width: 20%;
+    // max-height: .1;
+    // min-height: .1;                                        
+    background-color: black;           
+}
+
+mat-drawer {   
+    margin-top: 100px; 
+    background-color: rgb(137, 77, 240);
+    height: 100%;       
+    width: 300px;              
+    position: fixed;
+}

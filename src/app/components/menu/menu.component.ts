@@ -24,6 +24,8 @@ export class MenuComponent implements OnInit {
 
   isAdm: boolean =  false;
 
+  showFiller = false; //ver menú (nav)
+
   constructor( 
     private apiLoginService: ApiLoginService, 
     private router: Router, 

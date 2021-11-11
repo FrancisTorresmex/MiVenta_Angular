@@ -1,40 +1,58 @@
 <!--a la variable dataConcept de menú le asigno lo que contenga cart, en este caso la lista de productos que a agregado el usuario-->
 <app-menu [dataCart]="cart" (newDataCart)="f($event)"></app-menu>
 
+<!--Buscador-->
+<mat-grid-list cols="2" rowHeight="80px" class="search">
+    <mat-grid-tile>
+        <mat-form-field class="formSearch">
+            <mat-label class="labelSearch">Buscar</mat-label>
+            <input matInput placeholder="Nombre o ID del producto" [(ngModel)]="searchArticle" class="inputSearch">       
+        </mat-form-field>                
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <button mat-icon-button class="buttonSearch" (click)="search()">
+            <mat-icon class="iconSearch">search</mat-icon>
+        </button>
+    </mat-grid-tile>
+</mat-grid-list>
+
+
 <!--Home normal-->
 <div *ngIf="homeAdmin() == false">    
-        <mat-grid-list [cols]="breakpoint" rowHeight="2:5" (window:resize)="onResize($event)">                        
+        <mat-grid-list cols="2" rowHeight="300px">                        
             <mat-grid-tile *ngFor="let item of lst">                        
-            <mat-card  class="card">                
-                
+                <mat-card  class="card">                                
                     <mat-card-title>{{item.nombre}}</mat-card-title>
+                    
+                    <mat-card-header>
+                        <img src="{{item.url}}" alt="{{item.nombre}}" class="img">
+                    </mat-card-header>
     
-                <mat-card-header>
-                    <img src="{{item.url}}" alt="{{item.nombre}}" class="img">
-                </mat-card-header>
+                        <mat-card-content>$ {{item.precioUnitario}} M.X</mat-card-content>
     
-                <mat-card-content>$ {{item.precioUnitario}} M.X</mat-card-content>
+                        <p>{{item.existencia == 1 ? 'Disponible' : 'No disponible'}}</p>
     
-                <p>{{item.existencia == 1 ? 'Disponible' : 'No disponible'}}</p>
-    
-                <mat-card-actions>
-                    <button mat-button color="primary" (click)="openDialogProduct(item)" *ngIf="item.existencia == 1">Agregar</button>
-                </mat-card-actions>                
-            </mat-card>  
-        </mat-grid-tile>
-
+                    <mat-card-actions>
+                        <button mat-button color="primary" (click)="openDialogProduct(item)" *ngIf="item.existencia == 1">Agregar</button>
+                    </mat-card-actions>                
+                </mat-card>  
+            </mat-grid-tile>
         </mat-grid-list>          
 
-        <button mat-button color="primary" (click)="previousPage()" *ngIf="page > 1">Anterior</button>
-        <button mat-button color="primary" (click)="nextPage()" *ngIf="lst.length > 0">Siguiente</button>
+        <div class="buttonsPag">
+            <button mat-raised-button color="primary" class="buttonP" (click)="previousPage()" *ngIf="page > 1">Anterior</button>
+            <button mat-raised-button color="primary" class="buttonP" (click)="nextPage()" *ngIf="lst.length > 0">Siguiente</button>
+        </div>
     </div>
 
 
 
 <!--Home admin-->
-<mat-card class="cardAdmin" *ngIf="homeAdmin() == true">
-    <mat-card-title>Hola administrador, ¿que haremos hoy?</mat-card-title>    
-</mat-card>    
+<mat-grid-list cols="1" rowHeight="300px" *ngIf="homeAdmin() == true">
+    <mat-grid-tile>        
+            <h3 class="cardAdmin">Hola administrador, ¿que haremos hoy?</h3>                
+    </mat-grid-tile>
+</mat-grid-list>
 
 
 

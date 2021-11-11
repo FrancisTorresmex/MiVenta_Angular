@@ -44,6 +44,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'; //snackbar mate
 import {MatGridListModule} from '@angular/material/grid-list';  //Gird material
 import { MatMenuModule } from '@angular/material/menu';
 import { ProductComponent } from './pages/product/product.component'; //menú material
+import {MatSidenavModule} from '@angular/material/sidenav'; //nav material
 
 
 
@@ -90,6 +91,7 @@ import { ProductComponent } from './pages/product/product.component'; //menú ma
     MatSnackBarModule,
     MatGridListModule,
     MatMenuModule,
+    MatSidenavModule,
   ],
   providers: [
     //le agreglo la constante llamada Http_interseptor(es de sistema), que use mi clase creada llamada JwtInterceptor

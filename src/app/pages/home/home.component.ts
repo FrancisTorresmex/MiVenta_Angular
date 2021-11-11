@@ -16,9 +16,11 @@ import { MySnackBarService } from '../../tools/snackBar.service';
 })
 export class HomeComponent implements OnInit {
 
-  public lst: any[];
+  public lst: any[]; //lista para guardar todos los articulos recibidos
 
-  breakpoint: any
+  breakpoint: any;
+
+  searchArticle: any; //variable que almacenara lo que escribamos en el imput del buscador
 
   public cart!: CartProduct[]; //lista temporal que almacenara todo lo que vayamos añadiendo al carrito (conceptos: id del producto, cantidad etc)
 
@@ -81,6 +83,20 @@ export class HomeComponent implements OnInit {
     
     return false;
   }
+
+  //Buscar productos por id o nombre
+  search() {
+    this._apiProductoService.searchProduct(this.searchArticle).subscribe(resp => {
+      if (resp.success === 1) {
+        this.lst = resp.data;
+      }else{
+        this._mySnackBar.createMySnackBar(resp.message, 'error');
+      }
+    }, (error) => {
+      this._mySnackBar.createMySnackBar("Vérifica tu conexión a internet", 'error');
+    });
+  }
+
 
   //Mostrar gird según tamaño de pantalla
   onResize(event: any) {

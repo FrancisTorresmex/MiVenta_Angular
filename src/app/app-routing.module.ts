@@ -6,13 +6,14 @@ import { AuthGuard } from './security/auth.guard';
 import { RegisterComponent } from './pages/register/register.component';
 import { NotFoundComponent } from './pages/notFound/notFound.component';
 import { ProductComponent } from './pages/product/product.component';
+import { RoleGuard } from './security/role.guard';
 
 
 const routes: Routes = [ 
   { path: 'login', component: LoginComponent}, // este no lleva el CanActive porque ha este si pueden acceder
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},  //para entrar aqui necesita cumplir con el canActive creado (en este caso estar logeado)      
-  {path: 'product', component: ProductComponent, canActivate: [AuthGuard]},
+  {path: 'product', component: ProductComponent, canActivate: [AuthGuard, RoleGuard]},
 
   { path: '', redirectTo: '/login' , pathMatch: 'full'},
   { path: '**', component: NotFoundComponent },
