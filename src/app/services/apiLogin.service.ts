@@ -20,7 +20,7 @@ const httpOption = { //objeto headers
 })
 export class ApiLoginService {
 
-    private _url : string = 'https://localhost:44372/api/Usuario/Login';
+    private _url : string = 'https://localhost:44372/api/Auth/Login';
 
     private _userSubjet!: BehaviorSubject<User>; //behaviorSubject es un observable, que retorna el ultimo valor inmediatamente
     public user!: Observable<User>;
@@ -42,7 +42,8 @@ export class ApiLoginService {
             map(resp => {                
                 if(resp.success === 1) { //si el resultado recibido de la api es 1, osea Ok
                     const user: User = resp.data;                    
-                    localStorage.setItem('miUser', JSON.stringify(user));  // guardar en localstorage un item que se llamara miUsuario, y y la data 
+                    localStorage.setItem('miUser', JSON.stringify(user));  // guardar en localstorage un item que se llamara miUsuario, y y la data
+                    this._userSubjet.next(user); //ya que es un observable, le decimos que esten suscritos a este observable esten al pendiente de un cambio, en este caso el cambio es el usuario 
                 }                              
                 return resp;
             })            

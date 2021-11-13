@@ -7,6 +7,8 @@ import { DialogShoppingCart } from '../../pages/home/dialog/dialogShoppingCart.c
 import { CartProduct } from '../../models/cartProduct';
 import { DialogUserOrders } from './dialog/dialogUserOrders.component';
 import { DialogAllOrders } from './dialog/dialogAllOrders.component';
+import { UserComponent } from '../../pages/user/user.component';
+
 
 
 @Component({
@@ -31,8 +33,8 @@ export class MenuComponent implements OnInit {
     private apiLoginService: ApiLoginService, 
     private router: Router, 
     private _dialog: MatDialog ) 
-    {
-      this.isAdmin();      
+    {            
+      this.isAdmin();
     }
 
   ngOnInit(): void {}  
@@ -68,6 +70,13 @@ export class MenuComponent implements OnInit {
     });
   }
 
+  //abrir dialog de modificar cuenta
+  openDialogUser() {
+    const dialogRef = this._dialog.open(UserComponent, {
+      width: this.width
+    })
+  };
+
   //cerrar sesión
   logout() {
     this.apiLoginService.logout();
@@ -76,8 +85,11 @@ export class MenuComponent implements OnInit {
 
   //para mostrar el menu de rol normal o admin
   isAdmin() {
-    var x = JSON.parse(localStorage.getItem('miUser')!);
-    var isAdmin = x['rol'];
+    var isAdmin;
+    var x = JSON.parse(localStorage.getItem('miUser')!);    
+    if (x != null) {
+      isAdmin = x['rol'];  
+    }    
 
     if(isAdmin === "admin") {
       return  true;

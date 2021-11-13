@@ -1,0 +1,55 @@
+<h3 mat-dialog-title class="titulo">{{editar == true ? "Módificar cuenta" : "Mi cuenta"}}</h3>
+
+<!--Vista predeterminada-->
+<div *ngIf="editar == false">
+    <mat-grid-list cols="3" rowHeight="100px">
+        <mat-grid-tile>
+            <h3>Nombre:  {{local['nombre']}}</h3>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-icon-button (click)="editar = true; opcion = 'nombre'">
+                <mat-icon color="primar">edit</mat-icon>
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-icon-button (click)="editar = true; opcion = 'contraseña'">
+                <mat-icon color="warn">lock</mat-icon>
+            </button>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <button type="button" mat-button color="basic" (click)="close()">Cerrar ventana</button>
+
+</div>
+
+<!--Modificar nombre-->
+<div *ngIf="editar == true && opcion == 'nombre' ">
+    <form [formGroup]="userUpdateName" (ngSubmit)="updateName()">
+        <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <mat-icon class="icon" color="primary">face</mat-icon>
+            <input matInput placeholder="Nuevo nombre" formControlName="nombre">            
+        </mat-form-field>                        
+        <button type="submit" mat-button color="primary" [disabled]="!userUpdateName.valid" class="button">Módificar</button> 
+        <button type="button" mat-button color="basic" (click)="close()" class="button">Cerrar ventana</button>       
+    </form>
+</div>
+
+<!--Modificar contraseña-->
+<div *ngIf="editar == true && opcion == 'contraseña' ">
+    <form [formGroup]="userUpdatePassword" (ngSubmit)="updatePassword()">
+        <mat-form-field>
+            <mat-label>Contraseña actual</mat-label>
+            <input matInput placeholder="Contraseña actual" formControlName="oldPassword">
+            <mat-icon color="primary" class="icon">lock</mat-icon>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Nueva contraseña</mat-label>
+            <input matInput placeholder="Nueva contraseña" formControlName="newPassword">
+            <mat-icon color="primary" class="icon">lock</mat-icon>
+        </mat-form-field>
+
+        <button type="submit" mat-button color="primary" [disabled]="!userUpdatePassword.valid" class="button">Módificar</button>        
+        <button type="button" mat-button color="basic" (click)="close()" class="button">Cerrar ventana</button>
+    </form>
+</div>

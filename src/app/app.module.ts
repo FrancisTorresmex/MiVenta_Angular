@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ProductComponent } from './pages/product/product.component'; 
+import { UserComponent } from './pages/user/user.component'; 
 import { DialogProductComponent } from './pages/home/dialog/dialogProduct.component';
 import { DialogShoppingCart } from './pages/home/dialog/dialogShoppingCart.component';
 import { DialogUserOrders } from './components/menu/dialog/dialogUserOrders.component';
@@ -42,16 +44,8 @@ import { MatToolbarModule } from '@angular/material/toolbar'; //tolbar material
 import { MatIconModule } from '@angular/material/icon'; //iconos material
 import { MatSnackBarModule } from '@angular/material/snack-bar'; //snackbar material
 import {MatGridListModule} from '@angular/material/grid-list';  //Gird material
-import { MatMenuModule } from '@angular/material/menu';
-import { ProductComponent } from './pages/product/product.component'; //menú material
+import { MatMenuModule } from '@angular/material/menu'; //menú material
 import {MatSidenavModule} from '@angular/material/sidenav'; //nav material
-
-
-
-
-
-
-
 
 
 
@@ -72,7 +66,7 @@ import {MatSidenavModule} from '@angular/material/sidenav'; //nav material
     NotFoundComponent,    
     ProductComponent,
     DialogAddProduct,    
-    DialogConfirmDelete,
+    DialogConfirmDelete, UserComponent,
   ],
   imports: [
     BrowserModule,

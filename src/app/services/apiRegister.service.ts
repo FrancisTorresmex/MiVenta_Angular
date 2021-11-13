@@ -17,7 +17,7 @@ const httpOption = { //objeto de headers
 })
 export class ApiRegisterService {
 
-    private _url: string = 'https://localhost:44372/api/Usuario/Registro';    
+    private _url: string = 'https://localhost:44372/api/Auth/Registro';    
 
     constructor(private _http: HttpClient) {}
 

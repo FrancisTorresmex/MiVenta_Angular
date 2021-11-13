@@ -79,8 +79,9 @@ export class HomeComponent implements OnInit {
   //mostrar inicio de administrador
   homeAdmin() {
     var isAdmin = JSON.parse(localStorage.getItem("miUser") as string);
-    if (isAdmin['rol'] == "admin") return true;
-    
+    if (isAdmin != null) {
+      if (isAdmin['rol'] == "admin") return true;
+    }        
     return false;
   }
 
