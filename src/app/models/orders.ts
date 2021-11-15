@@ -10,6 +10,7 @@ export interface Orders {
     idUsuario: number,
     idVenta: number,
     total: number,
+    entrega: boolean;
 
     laDireccion: Address,
 

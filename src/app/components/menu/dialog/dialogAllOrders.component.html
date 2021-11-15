@@ -10,6 +10,12 @@
         <mat-icon>search</mat-icon>
     </button>
 
+    <!--Chips-->
+    <mat-chip-list cdkDropList cdkDropListOrientation="horizontal">
+        <mat-chip cdkDrag class="chip" (click)="delivery = true; isDelivery = true; searchDelivery()">Entregados</mat-chip>
+        <mat-chip cdkDrag class="chip" (click)="delivery = false; isDelivery = true; searchDelivery()">Pendientes</mat-chip>
+    </mat-chip-list>
+
     <!--Tarjetas-->
 <div mat-dialog-content class="todo">
 
@@ -20,7 +26,27 @@
         <p class="espacio"></p>
         
         <mat-card-title class="titleCard">ID de venta: {{orders.idVenta}}</mat-card-title>
-        <p> Usuario ID: {{orders.idUsuario}}</p>                
+        <p> Usuario ID: {{orders.idUsuario}}</p> 
+
+        <!--Entrega-->
+        <p>Entrega: {{orders.entrega == true ? 'Entregado' : 'Pendiente'}} 
+            <button mat-icon-button [matMenuTriggerFor]="menu" class="buttonEdit" >
+                <mat-icon>edit</mat-icon>
+            </button>                            
+        </p>         
+        
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="entregado = true; id = orders.idVenta; editDelivery()">
+                <span>Entregado</span>
+                <mat-icon color="primary">thumb_up_alt</mat-icon>
+            </button>
+            <button mat-menu-item (click)="entregado = false; id = orders.idVenta; editDelivery()">
+                <span>Pendiente</span>
+                <mat-icon color="warn">thumb_down_alt</mat-icon>
+            </button>
+        </mat-menu>
+        
+
         <p> Fecha: {{orders.fecha}} </p>
         <h3>Total: ${{orders.total}} M.X</h3>
 

@@ -2,7 +2,8 @@
 
 <div mat-dialog-content>
 
-   <h3 *ngIf="cart.length == 0 || cart  == []">Sin articulos aún, añade algunos productos (:</h3> <!--si al ir al carrito la lista cart no tiene nada, muestra mensaje-->
+   <!--si al ir al carrito la lista cart no tiene nada, muestra mensaje-->
+   <h3 *ngIf="cart.length == 0 || cart  == []" class="mensaje">Sin articulos aún, añade algunos productos.<mat-icon class="iconMensaje">sentiment_dissatisfied</mat-icon></h3> 
    
    <button mat-icon-button (click)="deleteCart()" color="warn" *ngIf="cart.length != 0">
       <mat-icon>delete_forever</mat-icon>

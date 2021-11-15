@@ -27,19 +27,19 @@
                 </div> 
                 <!--Botones Admin-->
                 <div *ngIf="isAdmin() == true">
-                    <button mat-button [routerLink]="['/home']" class="button">Inicio</button>           
-                    <button mat-button [routerLink]="['/product']" class="button">Productos</button>                
-                    <button mat-button (click)="openDialogAllOrders()" class="button">Pedidos</button>        
-                    <button mat-button (click)="logout()" class="button">Salir</button> 
+                    <button mat-button [routerLink]="['/home']" class="button">Inicio <mat-icon matSuffix class="iconsMenu">home</mat-icon></button>           
+                    <button mat-button [routerLink]="['/product']" class="button">Productos <mat-icon class="iconsMenu">loyalty</mat-icon></button>                
+                    <button mat-button (click)="openDialogAllOrders()" class="button">Pedidos <mat-icon class="iconsMenu">book</mat-icon></button>        
+                    <button mat-button (click)="logout()" class="button">Salir <mat-icon color="warn" class="iconsMenu">exit_to_app</mat-icon></button> 
                 </div>
                 
                 <!--Botones usuario normal-->
-                <div *ngIf="isAdmin() == false">
-                    <button mat-button [routerLink]="['/home']" class="button">Inicio</button> 
-                    <button mat-button (click)="openDialogShopping()" class="button">Mi carrito</button>
-                    <button mat-button (click)="openDialogUserOrders()" class="button">Historial de pedidos</button>
-                    <button mat-button (click)="openDialogUser()" class="button">Mi cuenta</button>
-                    <button mat-button (click)="logout()" class="button" class="button">Salir</button> 
+                <div *ngIf="isAdmin() == false">                    
+                    <button mat-button [routerLink]="['/home']" class="button">Inicio <mat-icon matSuffix class="iconsMenu">home</mat-icon></button> 
+                    <button mat-button (click)="openDialogShopping()" class="button">Mi carrito <mat-icon class="iconsMenu">shopping_cart</mat-icon></button>
+                    <button mat-button (click)="openDialogUserOrders()" class="button">Historial de pedidos <mat-icon class="iconsMenu">book</mat-icon></button>
+                    <button mat-button (click)="openDialogUser()" class="button">Mi cuenta <mat-icon class="iconsMenu">person</mat-icon></button>
+                    <button mat-button (click)="logout()" class="button" class="button">Salir <mat-icon color="warn" class="iconsMenu">exit_to_app</mat-icon></button> 
                 </div>
 
             </mat-sidenav>

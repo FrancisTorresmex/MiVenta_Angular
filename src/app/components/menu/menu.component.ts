@@ -59,7 +59,7 @@ export class MenuComponent implements OnInit {
   openDialogUserOrders() {
     const dialogRef = this._dialog.open( DialogUserOrders, {
       width: this.width,
-      height: this.height
+      // height: this.height
     });
   }
 

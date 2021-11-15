@@ -1,21 +1,29 @@
 <h3 mat-dialog-title class="titulo">Historial de pedidos</h3>
 
+<!--Buscador-->
 <mat-form-field appearance="outline">
     <mat-label>Buscar pedido</mat-label>
     <input type="number" matInput placeholder="ID de pedido" [(ngModel)]="searchOrder">
 </mat-form-field>    
 <button mat-icon-button class="buttonSearch" (click)="searchOrderUser()">
     <mat-icon class="iconSearch">search</mat-icon>
-</button>            
+</button>   
 
-<div mat-dialog-content>
+<!--Chips-->
+<mat-chip-list cdkDropList cdkDropListOrientation="horizontal">
+    <mat-chip cdkDrag class="chip" (click)="delivery = true; isDelivery = true; searchDeliveryUser()">Entregados</mat-chip>
+    <mat-chip cdkDrag class="chip" (click)="delivery = false; isDelivery = true; searchDeliveryUser()">Pendientes</mat-chip>
+</mat-chip-list>
+
+<div mat-dialog-content class="contenido">
 
     <p #incioProductos></p>
 
     <mat-card *ngFor="let orders of myOrders">
         
         <mat-card-title>ID: {{orders.idVenta}}</mat-card-title>
-        <h3>Total: ${{orders.total}} M.X</h3>
+        <p>Entrega: {{orders.entrega == true? "Completada" : "Pendiente"}}</p>
+        <h3>Total: ${{orders.total}} M.X</h3>        
         <p>Fecha de pedido: {{orders.fecha}}</p>
 
         <mat-card-content>

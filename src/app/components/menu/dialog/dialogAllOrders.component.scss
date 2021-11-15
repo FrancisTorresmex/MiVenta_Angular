@@ -9,6 +9,10 @@
     width: 80%;        
 }
 
+.buttonEdit{
+    background-color: purple;
+}
+
 .labelSearch {
     height: 10%;
 }
@@ -23,7 +27,14 @@
     margin-left: 3%;
 }
 
+.chip{
+    background-color: purple;
+    color: white;
+    margin-bottom: 10px;
+}
+
 .todo {
+    margin-top: 5px;
     text-align: center;
 }
 

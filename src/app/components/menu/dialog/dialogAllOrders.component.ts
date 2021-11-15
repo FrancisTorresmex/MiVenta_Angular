@@ -3,6 +3,7 @@ import { ApiPedidoService } from '../../../services/apiPedido.service';
 import { Orders } from '../../../models/orders';
 import { MySnackBarService } from '../../../tools/snackBar.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Delivery } from '../../../models/delivery';
 
 
 //Dialgo para ver todos los pedidos (admin)
@@ -17,7 +18,14 @@ export class DialogAllOrders {
     allOrders: Orders[]; //variable que almacenara los datos traidos de la respuesta de la api
 
     idSearch!: number; //id de venta a buscar
-    lstSearch: Orders[]; //
+    lstSearch: Orders[]; //    
+
+    //para buscar por estado (true = entregado, false = pendiente) 
+    delivery!: boolean; 
+
+    //Si algun chip es precionado significa que buscara en una lista especifica de orendes entregadas o pendientes
+    //por lo tanto esta variable se usa para decir que metodo ejecutar a los botones de pagina siguiente y anterior
+    isDelivery!: boolean;
 
     constructor(
         private _apiPedidoService: ApiPedidoService,
@@ -28,18 +36,22 @@ export class DialogAllOrders {
         this.allOrders = [];
         this.page = 1;
         this.getAllOrders();
-
+        this.delivery;
+        this.isDelivery;
         this.lstSearch = [];
     }
     
     ngOnInit(): void {}
 
+    // inidicador de orden entregada 
+    entregado: boolean = false; 
+    id!: number;    
+
     //Ver todos los pedidos
     getAllOrders() {
         this._apiPedidoService.getAllOrders(this.page).subscribe(resp => {
             if(resp.success === 1) {                             
-                this.allOrders = resp.data; //asignamos lo que contiene resp                
-                console.log(resp);
+                this.allOrders = resp.data; //asignamos lo que contiene resp                                
             }else{
                 this._mySnackBar.createMySnackBar(resp.message, 'error');
             }            
@@ -52,14 +64,26 @@ export class DialogAllOrders {
     nextPag(el:HTMLElement) {        
         this.scroll(el);
         this.page = ++this.page; //cada vez que se presiona el botón siguiente, se suma uno a page
-        this.getAllOrders(); //se recarga el metodo        
+
+        //si es true ejecuta el metodo searchDelivery
+        if (this.isDelivery == true) {
+            this.searchDelivery();
+        }else{
+            this.getAllOrders(); //se recarga el metodo
+        }        
     }
 
     //Volver una página de pedidos
     previousPag(el:HTMLElement) {
         this.scroll(el);
         this.page = --this.page;
-        this.getAllOrders();
+        
+        //si es true ejecuta el metodo searchDelivery
+        if (this.isDelivery == true) {
+            this.searchDelivery();
+        }else{
+            this.getAllOrders(); //se recarga el metodo
+        }        
     }
 
 
@@ -81,6 +105,41 @@ export class DialogAllOrders {
             this._mySnackBar.createMySnackBar('Vérifica tu conexión a internet', 'error');
         });
     }
+
+
+    //Editar entrega (admin) (entregado = true, pendeinte = false)
+    editDelivery() {
+        //Objeto que se enviara en la petición de editDelivary (para editar entrega)
+        const delivary: Delivery = { 
+            idVenta: this.id,
+            entrega: this.entregado
+        };
+
+        this._apiPedidoService.editDelivery(delivary).subscribe(resp => {
+            if (resp.success === 1) {
+                this.getAllOrders();
+                this._mySnackBar.createMySnackBar("Entrega editada éxitosamente.", '');
+            }else{              
+                this._mySnackBar.createMySnackBar(resp.message, 'error');
+            }
+        }, (error) => {
+            this._mySnackBar.createMySnackBar("Vérifica tu conexión a internet.", 'error');
+        });
+    }
+
+    //Buscar por estado (true = entregado, false = pendiente)
+    searchDelivery() {
+        this._apiPedidoService.searchDeliveryAdmin(this.delivery, this.page).subscribe(resp => {
+            if (resp.success === 1) {
+                this.allOrders = (resp.data);                        
+            }else{              
+                this._mySnackBar.createMySnackBar(resp.message, 'error');
+            }
+        }, (error) => {
+            this._mySnackBar.createMySnackBar("Vérifica tu conexión a internet.", 'error');
+        });    
+        
+    } 
 
 
     //cerrar dialog

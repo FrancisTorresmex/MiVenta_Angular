@@ -20,6 +20,13 @@ export class DialogUserOrders {
 
     searchOrder!: number; //para buscar una orden en el historial del usuario (de ese mismo usuario en sesión)
 
+    //para buscar por estado (true = entregado, false = pendiente) 
+    delivery!: boolean;
+
+    //Si algun chip es precionado significa que buscara en una lista especifica de orendes entregadas o pendientes
+    //por lo tanto esta variable se usa para decir que metodo ejecutar a los botones de pagina siguiente y anterior
+    isDelivery!: boolean;
+
     constructor(
         private _apiPedidoService: ApiPedidoService,
         private _mySncakBar: MySnackBarService,
@@ -67,22 +74,46 @@ export class DialogUserOrders {
 
     //Pasar a la página de productos siguiente
     nextPage(el:HTMLElement) {
-        this.page = ++this.page;
-        this.getAllOrders();
         this.scroll(el);
+        this.page = ++this.page;
+        //si es true ejecuta el metodo searchDelivery
+        if (this.isDelivery == true) {
+            this.searchDeliveryUser();    
+        }else{
+            this.getAllOrders();
+        }                
     }
 
 
     //Pasar a la página de productos anterior
     previousPage(el:HTMLElement) {
-        this.page = --this.page;
-        this.getAllOrders();
         this.scroll(el);
+        this.page = --this.page;
+        //si es true ejecuta el metodo searchDelivery
+        if (this.isDelivery == true) {
+            this.searchDeliveryUser();    
+        }else{
+            this.getAllOrders();
+        }        
     }
 
     //Al cambiar de página el scroll regresa al inicio
     scroll(el: HTMLElement) {
         el.scrollIntoView();
+    }
+
+
+    //Buscar pedidos por estado de entrega (true = entregado, false = pendiente)
+    searchDeliveryUser() {
+        this._apiPedidoService.searchDeliveryUser(this.localObject['id'], this.delivery, this.page).subscribe(resp => {
+            if (resp.success === 1) {
+                this.myOrders = (resp.data);
+            }else{
+                this._mySncakBar.createMySnackBar(resp.message, 'error');
+            }
+        }, (error) => {
+            this._mySncakBar.createMySnackBar('Vérifica tu conexión a internet', 'error');
+        })
     }
     
 
